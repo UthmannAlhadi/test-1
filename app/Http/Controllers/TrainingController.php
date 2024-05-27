@@ -24,6 +24,13 @@ class TrainingController extends Controller
     {
         $trainings = Training::all();
         // $uploaded_files = UploadedFile::all();
+        Session::put('trainings', $trainings);
+
+        // Get training IDs stored in the session
+        $trainingIds = session()->get('uploaded_training_ids', []);
+
+        // Retrieve trainings based on the IDs stored in the session
+        $trainings = Training::whereIn('id', $trainingIds)->get();
         return view('user.training-list', compact('trainings'));
 
     }
@@ -149,6 +156,10 @@ class TrainingController extends Controller
                 $uploadedTrainingIds = Session::get('uploaded_training_ids', []);
                 $uploadedTrainingIds[] = $trainingPage->id;
                 Session::put('uploaded_training_ids', $uploadedTrainingIds);
+                Session::put('training_page', $trainingPage);
+                Session::put('training', $training);
+                Session::put('page', $page);
+                Session::put('image_path', $imagePath);
             }
             $request->session()->put('total_pages', $pageCount);
 
@@ -232,9 +243,16 @@ class TrainingController extends Controller
         return redirect()->route('user.training-list');
     }
 
-    public function printPreview()
+    public function printPreview(Request $request)
     {
         $trainings = Training::all();
+        // Get training IDs stored in the session
+        $trainingIds = session()->get('uploaded_training_ids', []);
+        $trainings = Training::whereIn('id', $trainingIds)->get();
+
+        // Log the training IDs and training data for debugging
+        \Log::info('Training IDs from session: ' . implode(', ', $trainingIds));
+        \Log::info('Trainings: ' . $trainings->toJson());
 
         // Retrieve preferences from session with default values
         $printing_color_option = Session::get('printing_color_option', '1');
@@ -250,6 +268,9 @@ class TrainingController extends Controller
         // Retrieve total pages from session
         $totalPages = Session::get('total_pages', 1);
 
+        session()->put('total_price', $request->input('total_price'));
+        session()->put('trainings', $request->input('trainings'));
+
         // Calculate price based on preferences
         $colorPrice = $printing_color_option == '1' ? 0.1 : 0.2;
         $totalPrice = $colorPrice * $copies * $totalPages;
@@ -257,6 +278,8 @@ class TrainingController extends Controller
 
         // Log the total price for debugging
         \Log::info('Total Price Calculated: ' . $totalPrice);
+        // Debugging to ensure session data is set
+        \Log::info('Session data set: ', session()->all());
 
         return view('user.print-preview', compact('trainings', 'preferences', 'totalPrice'));
     }

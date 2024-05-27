@@ -87,16 +87,21 @@
                           </tr>
                         </thead>
                         <tbody class="h-full">
-                          @foreach ($trainings as $training)
-                            <tr
-                              class="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600">
-                              <td class="whitespace-nowrap px-6 py-4">
-                                <img src="{{ asset('images/trainings/' . $training->photo) }}" alt=""
-                                  class="training-image {{ $preferences['printing_color_option'] == '1' ? 'grayscale' : '' }} {{ $preferences['layout_option'] }}"
-                                  data-original-src="{{ asset('images/trainings/' . $training->photo) }}">
-                              </td>
-                            </tr>
-                          @endforeach
+                          @if ($trainings->isEmpty())
+                            <p>No trainings to preview.</p>
+                          @else
+                            <!-- Display training details and preferences -->
+                            @foreach ($trainings as $training)
+                              <tr
+                                class="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600">
+                                <td class="whitespace-nowrap px-6 py-4">
+                                  <img src="{{ asset('images/trainings/' . $training->photo) }}" alt=""
+                                    class="training-image {{ $preferences['printing_color_option'] == '1' ? 'grayscale' : '' }} {{ $preferences['layout_option'] }}"
+                                    data-original-src="{{ asset('images/trainings/' . $training->photo) }}">
+                                </td>
+                              </tr>
+                            @endforeach
+                          @endif
                         </tbody>
                       </table>
                     </div>
@@ -159,7 +164,7 @@
     <form action="{{ route('checkout') }}" method="GET">
       @csrf
       <button type="submit"
-        class="py-2 px-4 inline-flex my-5 items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-100 text-blue-800 hover:bg-blue-200 disabled:opacity-50 disabled:pointer-events-none dark:hover:bg-blue-900 dark:text-blue-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+        class="py-2 px-6 mx-2 inline-flex my-5 items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-100 text-blue-800 hover:bg-blue-200 disabled:opacity-50 disabled:pointer-events-none dark:hover:bg-blue-900 dark:text-blue-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
         Next
       </button>
     </form>
@@ -167,7 +172,7 @@
       <form method="post" action="{{ route('user.cancel-preview') }}">
         @csrf
         <button type="submit"
-          class="py-2 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-red-100 text-red-800 hover:bg-red-200">
+          class="py-2 px-6 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-red-100 text-red-800 hover:bg-red-200">
           Cancel
         </button>
       </form>

@@ -54,9 +54,8 @@ Route::middleware('auth')->group(function () {
     Route::post('user/cancel-preview', [\App\Http\Controllers\TrainingController::class, 'cancelPreview'])->name('user.cancel-preview');
 
     // Payment method
-    Route::get('/checkout', [\App\Http\Controllers\StripePaymentController::class, 'checkout'])->name('checkout');
-    Route::get('/payment-success', [StripePaymentController::class, 'paymentSuccess'])->name('payment.success');
-    Route::post('/stripe/webhook', [StripeWebhookController::class, 'handleWebhook'])->name('stripe.webhook');
+    Route::get('/checkout', [StripePaymentController::class, 'checkout'])->name('checkout');
+    Route::get('/payment-success', [StripePaymentController::class, 'success'])->name('payment.success');
     Route::get('/print-history', [\App\Http\Controllers\PrintHistoryController::class, 'index'])->name('print.history');
 
 

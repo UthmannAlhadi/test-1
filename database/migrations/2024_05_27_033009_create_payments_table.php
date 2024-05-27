@@ -8,21 +8,24 @@ return new class extends Migration {
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->string('stripe_session_id');
-            $table->integer('amount');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->decimal('amount', 8, 2);
+            $table->string('currency');
+            $table->string('payment_intent_id');
+            $table->string('payment_method');
             $table->string('status');
             $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
-    public function down()
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
     {
         Schema::dropIfExists('payments');
     }

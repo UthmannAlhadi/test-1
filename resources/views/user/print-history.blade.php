@@ -22,7 +22,7 @@
                           <div class="px-6 py-4">Print History
                           </div>
                         </div>
-                        <table>
+                        {{-- <table>
                           <thead>
                             <tr>
                               <th>ID</th>
@@ -41,7 +41,7 @@
                               </tr>
                             @endforeach
                           </tbody>
-                        </table>
+                        </table> --}}
                       </div>
                     </div>
                   </div>

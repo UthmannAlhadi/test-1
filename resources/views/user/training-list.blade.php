@@ -325,16 +325,21 @@
                           </tr>
                         </thead>
                         <tbody class="h-full">
-                          @foreach ($trainings as $training)
-                            <tr
-                              class="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600">
-                              <td class="whitespace-nowrap px-6 py-4">
-                                <img src="{{ asset('images/trainings/' . $training->photo) }}" alt=""
-                                  class="training-image"
-                                  data-original-src="{{ asset('images/trainings/' . $training->photo) }}">
-                              </td>
-                            </tr>
-                          @endforeach
+                          @if ($trainings->isEmpty())
+                            <p>No trainings available.</p>
+                          @else
+                            @foreach ($trainings as $training)
+                              <!-- Display training details -->
+                              <tr
+                                class="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600">
+                                <td class="whitespace-nowrap px-6 py-4">
+                                  <img src="{{ asset('images/trainings/' . $training->photo) }}" alt=""
+                                    class="training-image"
+                                    data-original-src="{{ asset('images/trainings/' . $training->photo) }}">
+                                </td>
+                              </tr>
+                            @endforeach
+                          @endif
                         </tbody>
                       </table>
                     </div>

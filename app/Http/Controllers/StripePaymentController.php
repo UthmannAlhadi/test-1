@@ -6,6 +6,8 @@ use Stripe\StripeClient;
 use Stripe\Webhook;
 use App\Models\Payment; // Your Payment model
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use App\Models\Training;
 
 class StripePaymentController extends Controller
 {
@@ -13,26 +15,20 @@ class StripePaymentController extends Controller
 
     public function checkout(Request $request)
     {
-        // Get the price from the session
         $price = session()->get('total_price');
-
-        // Ensure the price is valid
         if (!$price) {
-            // Handle the case where the price is not set in the session
             return redirect()->back()->withErrors(['error' => 'Price not found.']);
         }
 
-        // Initialize Stripe client
         $stripe = new StripeClient(env('STRIPE_SECRET'));
 
-        // Create a Stripe Checkout session
         $session = $stripe->checkout->sessions->create([
             'payment_method_types' => ['card'],
             'line_items' => [
                 [
                     'price_data' => [
                         'currency' => 'USD',
-                        'unit_amount' => $price * 100, // Convert price to cents
+                        'unit_amount' => $price * 100,
                         'product_data' => [
                             'name' => 'Print Service',
                         ],
@@ -41,41 +37,50 @@ class StripePaymentController extends Controller
                 ],
             ],
             'mode' => 'payment',
-            'success_url' => route('payment.success', ['session_id' => '{CHECKOUT_SESSION_ID}']),
+            'success_url' => route('payment.success'),
             'cancel_url' => route('user.print-preview'),
         ]);
 
-        // Redirect the user to the Stripe Checkout page
+        // Debugging to log session data before clearing
+        \Log::info('Session data before clearing in checkout: ', session()->all());
+
+        // Clear session data related to print-preview and training-list
+        session()->forget(['total_price', 'trainings', 'uploaded_training_ids']);
+        Session::forget('printing_color_option');
+        Session::forget('layout_option');
+        Session::forget('copies');
+        Session::forget('total_price');
+        Session::forget('trainings');
+        Session::forget('uploaded_training_ids');
+        Session::forget('total_pages');
+        Session::forget('training_page');
+        Session::forget('page');
+        Session::forget('image_path');
+        Session::forget('training');
+
+        // Debugging to log session data after clearing
+        \Log::info('Session data after clearing in checkout: ', session()->all());
+
         return redirect()->to($session->url);
     }
 
-    public function paymentSuccess(Request $request)
+    public function success(Request $request)
     {
-        // Retrieve the session ID from the request
-        $session_id = $request->get('session_id');
+        // Retrieve the uploaded training IDs from the session
+        $uploadedTrainingIds = Session::get('uploaded_training_ids', []);
+        // Debugging statement to check session data before clearing
+        \Log::info('Session data before clearing in success: ', session()->all());
 
-        if (!$session_id) {
-            return redirect()->route('user.print-preview')->withErrors(['error' => 'Session ID not found.']);
-        }
+        // Clear the session data
+        session()->forget(['total_price', 'trainings', 'uploaded_training_ids']);
+        // Additionally, you may want to delete the training records if necessary
+        $uploadedTrainingIds = Session::get('uploaded_training_ids', []);
+        Training::destroy($uploadedTrainingIds);
 
-        // Initialize Stripe client
-        $stripe = new StripeClient(env('STRIPE_SECRET'));
+        // Debugging statement to check session data after clearing
+        \Log::info('Session data after clearing in success: ', session()->all());
 
-        // Retrieve the checkout session
-        $session = $stripe->checkout->sessions->retrieve($session_id);
-
-        // Retrieve payment intent
-        $paymentIntent = $stripe->paymentIntents->retrieve($session->payment_intent);
-
-        // Save payment details to the database
-        $payment = new Payment();
-        $payment->user_id = auth()->id();
-        $payment->stripe_session_id = $session_id;
-        $payment->amount = $paymentIntent->amount;
-        $payment->status = $paymentIntent->status;
-        $payment->save();
-
-        return redirect()->route('print.history')->with('success', 'Payment successful!');
+        return redirect()->route('user.print-history')->with('message', 'Payment successful!');
     }
 
 }
