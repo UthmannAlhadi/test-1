@@ -161,13 +161,6 @@
 
 
   <div class="flex justify-center px-6 py-4">
-    <form action="{{ route('checkout') }}" method="GET">
-      @csrf
-      <button type="submit"
-        class="py-2 px-6 mx-2 inline-flex my-5 items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-100 text-blue-800 hover:bg-blue-200 disabled:opacity-50 disabled:pointer-events-none dark:hover:bg-blue-900 dark:text-blue-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
-        Next
-      </button>
-    </form>
     <div class="flex justify-center mt-5">
       <form method="post" action="{{ route('user.cancel-preview') }}">
         @csrf
@@ -177,6 +170,13 @@
         </button>
       </form>
     </div>
+    <form action="{{ route('checkout') }}" method="GET">
+      @csrf
+      <button type="submit"
+        class="py-2 px-4 mx-2 inline-flex my-5 items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-100 text-blue-800 hover:bg-blue-200 disabled:opacity-50 disabled:pointer-events-none dark:hover:bg-blue-900 dark:text-blue-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+        Make Payment
+      </button>
+    </form>
   </div>
 
 </x-app-layout>

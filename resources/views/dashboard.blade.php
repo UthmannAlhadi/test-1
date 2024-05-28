@@ -45,7 +45,7 @@
   </div>
 
   <!-- Track Order -->
-  <div
+  {{-- <div
     class="my-20 mx-20 flex flex-col bg-white border shadow-sm rounded-xl dark:bg-slate-900 dark:border-gray-700 dark:shadow-slate-700/[.7]">
     <div class="p-3 sm:p-4"> <!-- Adjusted padding -->
       <h3 class="text-base sm:text-lg font-bold text-gray-800 dark:text-white"> <!-- Adjusted text size -->
@@ -64,7 +64,7 @@
         </svg>
       </a>
     </div>
-  </div>
+  </div> --}}
 
 
 

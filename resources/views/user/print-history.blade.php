@@ -22,26 +22,57 @@
                           <div class="px-6 py-4">Print History
                           </div>
                         </div>
-                        {{-- <table>
-                          <thead>
-                            <tr>
-                              <th>ID</th>
-                              <th>Amount</th>
-                              <th>Status</th>
-                              <th>Date</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            @foreach ($payments as $payment)
-                              <tr>
-                                <td>{{ $payment->id }}</td>
-                                <td>{{ $payment->amount / 100 }} MYR</td>
-                                <td>{{ $payment->status }}</td>
-                                <td>{{ $payment->created_at }}</td>
-                              </tr>
-                            @endforeach
-                          </tbody>
-                        </table> --}}
+                        <div class="py-2">
+                          <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                              <div class="p-6 bg-white border-b border-gray-200">
+                                @php
+                                  $currentOrderId = null;
+                                @endphp
+                                @foreach ($trainings as $training)
+                                  @if ($training->order_id != $currentOrderId)
+                                    @if ($currentOrderId !== null)
+                              </div> <!-- Close previous container -->
+                              @endif
+                              <div class="flex mx-2 overflow-hidden">
+                                @endif
+                                <div class="py-4 mx-2">
+                                  <div class="w-48 max-w-sm px-4 py-3 bg-white rounded-3xl shadow-md dark:bg-gray-800">
+                                    @if ($training->order_id != $currentOrderId)
+                                      <div class="flex items-center justify-between">
+                                        <span
+                                          class="px-3 py-1 text-xs text-blue-800 uppercase bg-blue-200 rounded-full dark:bg-blue-300 dark:text-blue-900">
+                                          Order ID: {{ $training->order_id }}
+                                        </span>
+                                      </div>
+                                    @endif
+                                    <div class="mt-2">
+                                      <img src="{{ asset('images/trainings/' . $training->photo) }}"
+                                        alt="Training Image" class="w-40 h-40 rounded-md mb-4">
+                                      <h4 class="text-md font-normal text-gray-800 dark:text-white">
+                                      </h4>
+                                      <ul class="text-white py-2">
+                                        <li>Color:
+                                          {{ $training->printing_color_option == '1' ? 'Black & White' : 'Color' }}
+                                        </li>
+                                        <li>Layout: {{ ucfirst($training->layout_option) }}</li>
+                                        <li>Copies: {{ $training->copies }}</li>
+                                        <li>Total Price: RM{{ number_format($training->total_price, 2) }}</li>
+                                        <li>Status: {{ $training->payment_status }}</li>
+                                        <li>Time: {{ \Carbon\Carbon::parse($training->time)->format('d-m-Y H:i') }}</li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                </div>
+                                @php
+                                  $currentOrderId = $training->order_id;
+                                @endphp
+                                @endforeach
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
                       </div>
                     </div>
                   </div>
@@ -52,28 +83,8 @@
         </div>
       </div>
     </div>
-  </div>
-  {{-- <div class="py-4"> <!-- Print History Block -->
-                          <div class="w-full max-w-sm px-4 py-3 bg-white rounded-3xl shadow-md dark:bg-gray-800">
-                            <div class="flex items-center justify-between">
-                              <span
-                                class="px-3 py-1 text-xs text-blue-800 uppercase bg-blue-200 rounded-full dark:bg-blue-300 dark:text-blue-900">Order
-                                ID: </span>
-                            </div>
-                            <div>
-                              <h4 class="mt-2 text-md font-normal text-gray-800 dark:text-white">Date: </h4>
-                              <ul class="text-white py-2">
-                                <li>File name: </li>
-                              </ul>
-                            </div>
-                            <div>
-                              <div class="flex items-center mt-1 text-gray-700 dark:text-gray-200">
-                                <span>Total Price: </span>
-                              </div>
-                              <div class="flex items-center mt-2 text-gray-700 dark:text-gray-200">
-                                <span>Status: </span>
-                              </div>
-                            </div>
-                          </div> --}}
+
+
+
 
 </x-app-layout>

@@ -47,6 +47,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/traing-form', [\App\Http\Controllers\TrainingController::class, 'getTrainingForm'])->name('user.training-form');
     Route::get('/user/training-list', [\App\Http\Controllers\TrainingController::class, 'getTrainingList'])->name('user.training-list');
     Route::get('/user/print-preview', [\App\Http\Controllers\TrainingController::class, 'printPreview'])->name('user.print-preview');
+    Route::post('/user/print-preview', [\App\Http\Controllers\TrainingController::class, 'printPreview'])->name('user.print-preview'); //test
     Route::post('/user/add-training', [\App\Http\Controllers\TrainingController::class, 'postAddTraining'])->name('user.add-training');
     Route::post('/user/delete-training', [\App\Http\Controllers\TrainingController::class, 'DeleteTraining'])->name('user.delete-training');
     Route::post('/user/update-document-display', [\App\Http\Controllers\TrainingController::class, 'updateDocumentDisplay'])->name('user.update-document-display');
@@ -56,7 +57,7 @@ Route::middleware('auth')->group(function () {
     // Payment method
     Route::get('/checkout', [StripePaymentController::class, 'checkout'])->name('checkout');
     Route::get('/payment-success', [StripePaymentController::class, 'success'])->name('payment.success');
-    Route::get('/print-history', [\App\Http\Controllers\PrintHistoryController::class, 'index'])->name('print.history');
+    Route::get('/print-history', [StripePaymentController::class, 'printHistory'])->name('user.print-history');
 
 
 });

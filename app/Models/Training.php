@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Training extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'photo',
+        'printing_color_option',
+        'layout_option',
+        'copies',
+    ];
 }

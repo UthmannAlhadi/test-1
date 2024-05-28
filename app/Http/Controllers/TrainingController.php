@@ -254,6 +254,8 @@ class TrainingController extends Controller
         \Log::info('Training IDs from session: ' . implode(', ', $trainingIds));
         \Log::info('Trainings: ' . $trainings->toJson());
 
+
+
         // Retrieve preferences from session with default values
         $printing_color_option = Session::get('printing_color_option', '1');
         $layout_option = Session::get('layout_option', 'portrait');
@@ -265,6 +267,19 @@ class TrainingController extends Controller
             'copies' => $copies
         ];
 
+        // Store preferences in session
+        Session::put('printing_color_option', $printing_color_option);
+        Session::put('layout_option', $layout_option);
+        Session::put('copies', $copies);
+
+        // Update each training entry with the preferred settings
+        foreach ($trainings as $training) {
+            $training->printing_color_option = $printing_color_option;
+            $training->layout_option = $layout_option;
+            $training->copies = $copies;
+            $training->save();
+        }
+
         // Retrieve total pages from session
         $totalPages = Session::get('total_pages', 1);
 
@@ -275,6 +290,13 @@ class TrainingController extends Controller
         $colorPrice = $printing_color_option == '1' ? 0.1 : 0.2;
         $totalPrice = $colorPrice * $copies * $totalPages;
         session()->put('total_price', $totalPrice);
+
+        // Prepare preferences for display
+        $preferences = [
+            'printing_color_option' => $printing_color_option,
+            'layout_option' => $layout_option,
+            'copies' => $copies
+        ];
 
         // Log the total price for debugging
         \Log::info('Total Price Calculated: ' . $totalPrice);
