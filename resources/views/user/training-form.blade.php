@@ -25,7 +25,7 @@
       </a>
     </li>
     <li class="inline-flex items-center">
-      <a class="flex items-center text-sm text-gray-500 hover:text-blue-600 focus:outline-none focus:text-blue-600 dark:focus:text-blue-500"
+      <a class="flex items-center text-sm text-gray-900 hover:text-blue-600 focus:outline-none focus:text-blue-600 dark:focus:text-blue-500"
         href="{{ route('user.training-form') }}">
         Create Print Job
         <svg class="flex-shrink-0 mx-2 overflow-visible size-4 text-gray-400 dark:text-neutral-600"
@@ -68,7 +68,7 @@
   <!-- Image Upload -->
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-      <div class="bg-white border rounded shadow p-4">
+      <div class="bg-white border rounded-lg shadow p-4">
         <div class="p-2">
           <!-- Body content goes here -->
           @if (Session::has('message'))
@@ -79,8 +79,8 @@
           @endif
           <form method="post" action="{{ route('user.add-training') }}" enctype="multipart/form-data">
             @csrf
-            <table class="min-w-full divide-y divide-gray-200">
-              <tbody class="bg-white divide-y divide-gray-200">
+            <table class="min-w-full divide-y divide-gray-400">
+              <tbody class="bg-white divide-y divide-gray-400">
                 <!-- ... similar for other rows ... -->
                 <tr>
                   <td class="px-6 py-4 whitespace-nowrap">Upload File</td>

@@ -37,7 +37,7 @@
       </a>
     </li>
     <li class="inline-flex items-center">
-      <a class="flex items-center text-sm text-gray-500 hover:text-blue-600 focus:outline-none focus:text-blue-600 dark:focus:text-blue-500"
+      <a class="flex items-center text-sm text-gray-900 hover:text-blue-600 focus:outline-none focus:text-blue-600 dark:focus:text-blue-500"
         href="{{ route('user.training-list') }}">
         Set Print Preference
         <svg class="flex-shrink-0 mx-2 overflow-visible size-4 text-gray-400 dark:text-neutral-600"
@@ -66,47 +66,46 @@
   <!-- Chevrons Breadcrumbs End -->
 
   <!-- Display File -->
-  <div class="container mx-auto bg-slate-500" style="width: 1200px; height: 600px; overflow: hidden;">
-    <div class="py-4 px-2 grid grid-cols-1 sm:grid-cols-3 gap-4 h-full">
-      <!-- Content Left Side -->
-      <div class="sm:col-span-2 h-full overflow-y-auto custom-scrollbar">
-        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg h-full">
-          <div class="bg-white border rounded shadow p-4 h-full">
-            <div class="p-2 h-full">
-              @if (Session::has('message'))
-                <div class="bg-green-500 text-white px-4 py-2 rounded">
-                  {{ Session::get('message') }}
-                </div>
-              @endif
-              <div class="flex flex-col h-full">
-                <div class="sm:-mx-6 lg:-mx-8 w-full h-full">
-                  <div class="inline-block min-w-full py-0 sm:px-6 lg:px-8 h-full">
-                    <div class="overflow-auto h-full custom-scrollbar">
-                      <table class="min-w-full text-left text-sm font-light h-full">
-                        <thead class="border-b font-medium dark:border-neutral-500">
-                          <tr>
-                            <th scope="col" class="px-6 py-4">File</th>
-                          </tr>
-                        </thead>
-                        <tbody class="h-full">
-                          @if ($trainings->isEmpty())
-                            <p>No trainings available.</p>
-                          @else
-                            @foreach ($trainings as $training)
-                              <!-- Display training details -->
-                              <tr
-                                class="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600">
-                                <td class="whitespace-nowrap px-6 py-4">
-                                  <img src="{{ asset('images/trainings/' . $training->photo) }}" alt=""
-                                    class="training-image"
-                                    data-original-src="{{ asset('images/trainings/' . $training->photo) }}">
-                                </td>
-                              </tr>
-                            @endforeach
-                          @endif
-                        </tbody>
-                      </table>
-                    </div>
+  <div class="container mx-auto py-4 px-2 grid grid-cols-1 sm:grid-cols-3 gap-4 h-full"
+    style="width: 1200px; height: 600px; overflow: hidden;">
+    <!-- Content Left Side -->
+    <div class="sm:col-span-2 h-full overflow-y-auto custom-scrollbar">
+      <div class="bg-white overflow-hidden shadow-sm sm:rounded-2xl h-full">
+        <div class="bg-white border rounded shadow p-4 h-full">
+          <div class="p-2 h-full">
+            @if (Session::has('message'))
+              <div class="bg-green-500 text-white px-4 py-2 rounded">
+                {{ Session::get('message') }}
+              </div>
+            @endif
+            <div class="flex flex-col h-full">
+              <div class="sm:-mx-6 lg:-mx-8 w-full h-full">
+                <div class="inline-block min-w-full py-0 sm:px-6 lg:px-8 h-full">
+                  <div class="overflow-auto h-full custom-scrollbar">
+                    <table class="min-w-full text-left text-sm font-light h-full">
+                      <thead class="border-b border-gray-400 font-medium dark:border-neutral-500">
+                        <tr>
+                          <th scope="col" class="px-6 py-4">File</th>
+                        </tr>
+                      </thead>
+                      <tbody class="h-full">
+                        @if ($trainings->isEmpty())
+                          <p>No trainings available.</p>
+                        @else
+                          @foreach ($trainings as $training)
+                            <!-- Display training details -->
+                            <tr
+                              class="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600">
+                              <td class="whitespace-nowrap px-6 py-4">
+                                <img src="{{ asset('images/trainings/' . $training->photo) }}" alt=""
+                                  class="training-image"
+                                  data-original-src="{{ asset('images/trainings/' . $training->photo) }}">
+                              </td>
+                            </tr>
+                          @endforeach
+                        @endif
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>
@@ -114,89 +113,89 @@
           </div>
         </div>
       </div>
-      <!-- Content Right Side -->
-      <div class="h-full">
-        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-          <div class="bg-white border rounded shadow p-5">
-            <div class="p-2 h-full">
-              @if (Session::has('message'))
-                <div class="bg-green-500 text-white px-4 py-2 rounded">
-                  {{ Session::get('message') }}
-                </div>
-              @endif
-              <div class="flex flex-col">
-                <div class="sm:-mx-6 lg:-mx-8 w-full h-full">
-                  <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8 h-full">
-                    <div class="overflow-hidden h-full">
-                      <form id="preferenceForm" action="{{ route('user.print-preview') }}" method="POST">
-                        @csrf
-                        <table class="min-w-full text-left text-sm font-light h-full">
-                          <thead class="border-b font-medium dark:border-neutral-500">
-                            <tr>
-                              <th scope="col" class="px-6 py-4">Set Preference</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td>Printing Color</td>
-                              <td>
-                                <div class="grid w-full place-items-center">
-                                  <div class="grid w-52 grid-cols-2 gap-2 rounded-xl bg-gray-50 p-2">
-                                    <div>
-                                      <input type="radio" name="printing_color_option"
-                                        id="printing_color_option_black" value="1" class="peer hidden" />
-                                      <label for="printing_color_option_black"
-                                        class="block text-xs cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white">Black
-                                        & White</label>
-                                    </div>
-                                    <div>
-                                      <input type="radio" name="printing_color_option"
-                                        id="printing_color_option_color" value="2" class="peer hidden" />
-                                      <label for="printing_color_option_color"
-                                        class="block text-xs cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white">Color</label>
-                                    </div>
+    </div>
+    <!-- Content Right Side -->
+    <div class="h-full">
+      <div class="bg-white overflow-hidden shadow-sm sm:rounded-2xl">
+        <div class="bg-white border rounded shadow p-5">
+          <div class="p-2 h-full">
+            @if (Session::has('message'))
+              <div class="bg-green-500 text-white px-4 py-2 rounded">
+                {{ Session::get('message') }}
+              </div>
+            @endif
+            <div class="flex flex-col">
+              <div class="sm:-mx-6 lg:-mx-8 w-full h-full">
+                <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8 h-full">
+                  <div class="overflow-hidden h-full">
+                    <form id="preferenceForm" action="{{ route('user.print-preview') }}" method="POST">
+                      @csrf
+                      <table class="min-w-full text-left text-sm font-light h-full">
+                        <thead class="border-b border-gray-400 font-medium dark:border-neutral-500">
+                          <tr>
+                            <th scope="col" class="px-6 py-8">Set Preference</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>Printing Color</td>
+                            <td>
+                              <div class="grid w-full place-items-center">
+                                <div class="grid w-52 grid-cols-2 gap-2 rounded-xl bg-gray-50 p-2">
+                                  <div>
+                                    <input type="radio" name="printing_color_option"
+                                      id="printing_color_option_black" value="1" class="peer hidden" />
+                                    <label for="printing_color_option_black"
+                                      class="block text-xs cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white">Black
+                                      & White</label>
+                                  </div>
+                                  <div>
+                                    <input type="radio" name="printing_color_option"
+                                      id="printing_color_option_color" value="2" class="peer hidden" />
+                                    <label for="printing_color_option_color"
+                                      class="block text-xs cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white">Color</label>
                                   </div>
                                 </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>Layout</td>
-                              <td>
-                                <div class="grid w-full place-items-center">
-                                  <div class="grid w-52 grid-cols-2 gap-2 rounded-xl bg-gray-50 p-2">
-                                    <div>
-                                      <input type="radio" name="layout_option" id="layout_option_portrait"
-                                        value="portrait" class="peer hidden" />
-                                      <label for="layout_option_portrait"
-                                        class="block text-xs cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white">Portrait</label>
-                                    </div>
-                                    <div>
-                                      <input type="radio" name="layout_option" id="layout_option_landscape"
-                                        value="landscape" class="peer hidden" />
-                                      <label for="layout_option_landscape"
-                                        class="block text-xs cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white">Landscape</label>
-                                    </div>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Layout</td>
+                            <td>
+                              <div class="grid w-full place-items-center">
+                                <div class="grid w-52 grid-cols-2 gap-2 rounded-xl bg-gray-50 p-2">
+                                  <div>
+                                    <input type="radio" name="layout_option" id="layout_option_portrait"
+                                      value="portrait" class="peer hidden" />
+                                    <label for="layout_option_portrait"
+                                      class="block text-xs cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white">Portrait</label>
+                                  </div>
+                                  <div>
+                                    <input type="radio" name="layout_option" id="layout_option_landscape"
+                                      value="landscape" class="peer hidden" />
+                                    <label for="layout_option_landscape"
+                                      class="block text-xs cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white">Landscape</label>
                                   </div>
                                 </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>Copies</td>
-                              <td>
-                                <input type="number" name="copies" id="copies" value="1" min="1"
-                                  class="border-gray-300 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 rounded-md">
-                              </td>
-                            </tr>
-                            <!-- Other preferences here -->
-                          </tbody>
-                        </table>
-                        <div class="flex justify-center px-6 py-4">
-                          <button type="submit"
-                            class="py-2 px-4 inline-flex my-5 items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-100 text-blue-800 hover:bg-blue-200">Apply
-                            Preferences</button>
-                        </div>
-                      </form>
-                    </div>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Copies</td>
+                            <td>
+                              <input type="number" name="copies" id="copies" value="1" min="1"
+                                class="border-gray-300 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 rounded-md">
+                            </td>
+                          </tr>
+                          <!-- Other preferences here -->
+                        </tbody>
+                      </table>
+                      <div class="flex justify-center px-6 py-4">
+                        <button type="submit"
+                          class="py-2 px-4 inline-flex my-5 items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-100 text-blue-800 hover:bg-blue-200">Apply
+                          Preferences</button>
+                      </div>
+                    </form>
                   </div>
                 </div>
               </div>

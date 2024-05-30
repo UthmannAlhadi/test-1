@@ -12,7 +12,7 @@
           <!-- Title -->
           <h1
             class="text-3xl text-gray-800 font-bold md:text-4xl md:leading-tight lg:text-5xl lg:leading-tight dark:text-gray-200">
-            Smart Printing System <span class="text-blue-600 dark:text-blue-500 lg:text-4xl">Solutions</span>
+            Ziegers Printing <span class="text-blue-600 dark:text-blue-500 lg:text-4xl">System</span>
           </h1>
           <p class="mt-3 text-base text-gray-500">
             Built to help users ease their printing journey without the need for any manual process.
@@ -32,7 +32,6 @@
                 autocomplete="username" />
               <x-input-error :messages="$errors->get('email')" class="mt-2" />
             </div>
-
             <!-- Password Label -->
             <div class="mt-2">
               <x-input-label for="password" :value="__('Password')" class="block text-sm font-medium dark:text-white"><span

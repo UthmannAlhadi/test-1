@@ -37,17 +37,19 @@
 
 <!-- Sidebar -->
 <div id="application-sidebar"
-  class="hs-overlay hs-overlay-open:translate-x-0 -translate-x-full transition-all duration-300 transform hidden fixed top-0 start-0 bottom-0 z-[60] w-52 bg-white border-e border-gray-200 pt-7 pb-10 overflow-y-auto lg:block lg:translate-x-0 lg:end-auto lg:bottom-0 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-slate-700 dark:[&::-webkit-scrollbar-thumb]:bg-slate-500 dark:bg-gray-800 dark:border-gray-700">
+  class="hs-overlay hs-overlay-open:translate-x-0 -translate-x-full transition-all duration-300 transform hidden fixed top-0 start-0 bottom-0 z-[60] w-52 bg-white border-e border-gray-400 pt-7 pb-10 overflow-y-auto lg:block lg:translate-x-0 lg:end-auto lg:bottom-0 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-slate-700 dark:[&::-webkit-scrollbar-thumb]:bg-slate-500 dark:bg-gray-800 dark:border-gray-700">
   <div class="px-6">
     <a class="flex-none text-xl font-semibold dark:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-      href="#" aria-label="Brand">SPS</a>
+      href="#" aria-label="Brand">Ziegers Printing</a>
   </div>
 
   <nav class="hs-accordion-group p-6 w-full flex flex-col flex-wrap" data-hs-accordion-always-open>
     <ul class="space-y-1.5">
+      <!-- Dashboard Button -->
       <li>
-        <a class="flex items-center gap-x-3.5 py-2 px-2.5 bg-gray-100 text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-          href="{{ route('dashboard') }}">
+        <a href="{{ route('dashboard') }}"
+          class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg hover:bg-blue-500 dark:hover:bg-gray-900 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600
+                {{ Route::is('dashboard') ? 'bg-blue-400 text-white' : 'text-slate-700 dark:bg-gray-800' }}">
           <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
             stroke-linejoin="round">
@@ -57,22 +59,88 @@
           Dashboard
         </a>
       </li>
+      @if (auth()->user()->role == 'customer')
+        <!-- Print Job Button -->
+        <li>
+          <a href="{{ route('user.training-form') }}"
+            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg hover:bg-blue-500 dark:hover:bg-gray-900 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600
+                {{ Route::is('user.training-form') ? 'bg-blue-400 text-white' : 'text-slate-700 dark:bg-gray-800' }}">
+            <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg>
+            Print Job
+          </a>
+        </li>
+        <!-- Print History Button -->
+        <li>
+          <a href="{{ route('user.print-history') }}"
+            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg hover:bg-blue-500 dark:hover:bg-gray-900 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600
+                {{ Route::is('user.print-history') ? 'bg-blue-400 text-white' : 'text-slate-700 dark:bg-gray-800' }}">
+            <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <rect width="20" height="14" x="2" y="7" rx="2" ry="2" />
+              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+            </svg>
+            Print History
+          </a>
+        </li>
+        <!-- Profile Button -->
+        <li>
+          <a href="{{ route('profile.edit') }}"
+            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg hover:bg-blue-500 dark:hover:bg-gray-900 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600
+                {{ Route::is('profile.edit') ? 'bg-blue-400 text-white' : 'text-slate-700 dark:bg-gray-800' }}">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+              class="flex-shrink-0 size-5">
+              <path fill-rule="evenodd"
+                d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"
+                clip-rule="evenodd" />
+            </svg>
+            Profile
+          </a>
+        </li>
+      @else
+        @if (auth()->user()->role == 'admin')
+          <!-- Admin Print Job Button -->
+          <li>
+            <a href="{{ route('user.admin-print-job') }}"
+              class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg hover:bg-blue-500 dark:hover:bg-gray-900 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600
+                {{ Route::is('user.admin-print-job') ? 'bg-blue-400 text-white' : 'text-slate-700 dark:bg-gray-800' }}">
+              <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+              Admin Print Job
+            </a>
+          </li>
+          <!-- Admin Sales Button -->
+          <li>
+            <a href="{{ route('user.admin-sales') }}"
+              class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg hover:bg-blue-500 dark:hover:bg-gray-900 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600
+                {{ Route::is('user.admin-sales') ? 'bg-blue-400 text-white' : 'text-slate-700 dark:bg-gray-800' }}">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="flex-shrink-0 size-5">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12A2.25 2.25 0 0 0 20.25 18V6A2.25 2.25 0 0 0 18 3.75H6A2.25 2.25 0 0 0 3.75 6v12A2.25 2.25 0 0 0 6 20.25Z" />
+              </svg>
 
-      <a class="hs-accordion" id="users-accordion" href="{{ route('user.training-form') }}">
-        <button type="button"
-          class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:hs-accordion-active:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
-          <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round">
-            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-            <circle cx="9" cy="7" r="4" />
-            <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-          </svg>
-          Print Job
-        </button>
-      </a>
-      {{-- 
+              Admin Sales
+            </a>
+          </li>
+        @endif
+      @endif
+    </ul>
+  </nav>
+  {{-- 
       <a class="hs-accordion" id="account-accordion">
         <button type="button"
           class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:hs-accordion-active:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
@@ -94,20 +162,5 @@
           Track Order
         </button>
       </a> --}}
-
-      <a class="hs-accordion" id="projects-accordion" href="{{ route('user.print-history') }}">
-        <button type="button"
-          class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent text-sm text-slate-700 rounded-lg hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-900 dark:text-slate-400 dark:hover:text-slate-300 dark:hs-accordion-active:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
-          <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round">
-            <rect width="20" height="14" x="2" y="7" rx="2" ry="2" />
-            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
-          </svg>
-          Print History
-        </button>
-      </a>
-    </ul>
-  </nav>
 </div>
 <!-- End Sidebar -->

@@ -24,6 +24,7 @@ class StripePaymentController extends Controller
             return redirect()->back()->withErrors(['error' => 'Price not found.']);
         }
 
+        $paymentMethod = $request->input('payment_method');
         $orderId = $this->generateOrderId(); // Generate a unique order ID
         $currentTime = Carbon::now('Asia/Kuala_Lumpur'); // Get the current timestamp
 
@@ -32,8 +33,29 @@ class StripePaymentController extends Controller
         DB::table('trainings')->whereIn('id', $trainingIds)->update([
             'order_id' => $orderId,
             'total_price' => $price,
-            'time' => $currentTime
+            'time' => $currentTime,
+            'payment_status' => $paymentMethod === 'cash' ? 'Pending' : 'Unpaid',
         ]);
+
+        // Handle cash payment separately
+        if ($paymentMethod === 'cash') {
+            // Clear session data related to print-preview and training-list
+            session()->forget(['total_price', 'trainings', 'uploaded_training_ids']);
+            Session::forget('printing_color_option');
+            Session::forget('layout_option');
+            Session::forget('copies');
+            Session::forget('total_price');
+            Session::forget('trainings');
+            Session::forget('uploaded_training_ids');
+            Session::forget('total_pages');
+            Session::forget('training_page');
+            Session::forget('page');
+            Session::forget('image_path');
+            Session::forget('training');
+
+            \Log::info('Session data after clearing in checkout (cash): ', session()->all());
+            return redirect()->route('user.print-history');
+        }
 
         $stripeSecret = env('STRIPE_SECRET');
         \Log::info('STRIPE_SECRET value: ' . $stripeSecret);
@@ -79,7 +101,7 @@ class StripePaymentController extends Controller
         Session::forget('training');
 
         // Debugging to log session data after clearing
-        \Log::info('Session data after clearing in checkout: ', session()->all());
+        \Log::info('Session data after clearing in checkout (stripe): ', session()->all());
 
         return redirect()->to($session->url);
     }

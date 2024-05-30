@@ -40,6 +40,12 @@ class PrintJobController extends Controller
         return view('user.print-history');
     }
 
+    public function displayAdminPrintJob()
+    {
+
+        return view('user.admin-print-job');
+    }
+
     public function index()
     {
         //

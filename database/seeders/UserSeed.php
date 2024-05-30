@@ -16,7 +16,7 @@ class UserSeed extends Seeder
         //
         DB::table('users')->insert([
             'name' => 'ADMIN',
-            'email' => 'admin@example.com',
+            'email' => 'admin@sps.com',
             'role' => 'admin',
             /*  'matric_number' => 'test',
              'exco' => 'test', */
@@ -24,9 +24,9 @@ class UserSeed extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'name' => 'USER',
+            'name' => 'user1',
             'email' => 'user1@example.com',
-            'role' => 'user',
+            'role' => 'customer',
             /*  'matric_number' => 'test',
              'exco' => 'test', */
             'password' => Hash::make('12345678'),

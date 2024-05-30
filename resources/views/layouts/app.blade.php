@@ -44,21 +44,19 @@
   </div>
 </body> --}}
 
-<body class="font-sans antialiased">
+<body class="font-sans antialiased bg-gray-50 dark:bg-slate-900 min-h-screen">
 
-  <body class="bg-gray-50 dark:bg-slate-900">
-    <!-- Navigation -->
-    @include('layouts.navigation')
+  <!-- Navigation -->
+  @include('layouts.navigation')
 
-    <!-- Sidebar -->
-    @include('layouts.sidebar')
+  <!-- Sidebar -->
+  @include('layouts.sidebar')
 
-    <!-- Content -->
-    <div class="w-full pt-10 px-4 sm:px-6 md:px-8 lg:ps-72">
-      {{ $slot }}
-    </div>
-    <!-- End Content -->
-  </body>
+  <!-- Content -->
+  <div class="w-full pt-10 px-4 sm:px-6 md:px-8 lg:ps-72 bg-gray-50">
+    {{ $slot }}
+  </div>
+  <!-- End Content -->
 </body>
 
 </html>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PrintJobController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SalesController;
 use App\Http\Controllers\UploadController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StripeWebhookController;
@@ -39,6 +40,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/print-preference', [PrintJobController::class, 'displayPreference'])->name('user.print-preference');
     Route::get('/user/print-preview', [PrintJobController::class, 'displayPreview'])->name('user.print-preview');
     Route::get('/user/print-history', [PrintJobController::class, 'displayPrintHistory'])->name('user.print-history');
+    Route::get('/user/admin-print-job', [PrintJobController::class, 'displayAdminPrintJob'])->name('user.admin-print-job');
 
 
     // Upload File
@@ -58,6 +60,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/checkout', [StripePaymentController::class, 'checkout'])->name('checkout');
     Route::get('/payment-success', [StripePaymentController::class, 'success'])->name('payment.success');
     Route::get('/print-history', [StripePaymentController::class, 'printHistory'])->name('user.print-history');
+
+    // Admin Sales
+    Route::get('/user/admin-sales', [SalesController::class, 'displaySales'])->name('user.admin-sales');
 
 
 });

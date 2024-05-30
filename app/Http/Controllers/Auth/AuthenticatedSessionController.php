@@ -45,4 +45,12 @@ class AuthenticatedSessionController extends Controller
 
         return redirect('/');
     }
+
+
+    public function userSelection(Request $request)
+    {
+
+
+
+    }
 }
