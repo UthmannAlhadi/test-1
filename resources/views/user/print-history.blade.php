@@ -19,8 +19,7 @@
                   <div class="overflow-auto h-full custom-scrollbar">
                     <div class="min-w-full text-left text-sm font-light h-full">
                       <div class="border-b border-gray-400 font-medium dark:border-neutral-900">
-                        <div class="px-6 py-4">Print History
-                        </div>
+                        <div class="px-6 py-4">Print History</div>
                       </div>
                       <div class="py-2">
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -28,51 +27,50 @@
                             <div class="p-6 bg-white border-b border-gray-200">
                               @php
                                 $currentOrderId = null;
+                                $count = 0;
                               @endphp
-                              @foreach ($trainings as $training)
-                                @if ($training->order_id != $currentOrderId)
-                                  @if ($currentOrderId !== null)
-                            </div> <!-- Close previous container -->
-                            @endif
-                            <div class="flex mx-2 overflow-hidden">
-                              @endif
-                              <div class="py-4 mx-2">
-                                <div class="w-48 max-w-sm px-4 py-3 bg-cyan-900 rounded-3xl shadow-md dark:bg-gray-800">
+                              <div class="flex flex-wrap -mx-2">
+                                @foreach ($trainings as $training)
                                   @if ($training->order_id != $currentOrderId)
-                                    <div class="flex items-center justify-between">
+                                    @if ($count % 4 == 0 && $count != 0)
+                              </div>
+                              <div class="flex flex-wrap -mx-2 mt-4">
+                                @endif
+                                @php
+                                  $currentOrderId = $training->order_id;
+                                  $count++;
+                                @endphp
+                                @endif
+                                <div class="w-full sm:w-1/2 lg:w-1/4 px-2 mb-4">
+                                  <div class="w-full bg-cyan-900 rounded-3xl shadow-md dark:bg-gray-800 p-4">
+                                    <div class="flex items-center justify-between mb-2">
                                       <span
                                         class="px-3 py-1 text-xs text-slate-800 uppercase bg-blue-200 rounded-full dark:bg-blue-300 dark:text-blue-900">
                                         Order ID: {{ $training->order_id }}
                                       </span>
                                     </div>
-                                  @endif
-                                  <div class="mt-2">
-                                    <img src="{{ asset('images/trainings/' . $training->photo) }}" alt="Training Image"
-                                      class="w-40 h-40 rounded-md mb-4">
-                                    <h4 class="text-md font-normal text-gray-800 dark:text-black">
-                                    </h4>
-                                    <ul class="text-white py-2">
-                                      <li>Color:
-                                        {{ $training->printing_color_option == '1' ? 'Black & White' : 'Color' }}
-                                      </li>
-                                      <li>Layout: {{ ucfirst($training->layout_option) }}</li>
-                                      <li>Copies: {{ $training->copies }}</li>
-                                      <li>Total Price: RM{{ number_format($training->total_price, 2) }}</li>
-                                      <li>Status: {{ $training->payment_status }}</li>
-                                      <li>Time: {{ \Carbon\Carbon::parse($training->time)->format('d-m-Y H:i') }}</li>
-                                    </ul>
+                                    <div class="mt-2">
+                                      <img src="{{ asset('images/trainings/' . $training->photo) }}"
+                                        alt="Training Image" class="w-full h-40 rounded-md mb-4">
+                                      <h4 class="text-md font-normal text-gray-800 dark:text-black"></h4>
+                                      <ul class="text-white py-2">
+                                        <li>Color:
+                                          {{ $training->printing_color_option == '1' ? 'Black & White' : 'Color' }}</li>
+                                        <li>Layout: {{ ucfirst($training->layout_option) }}</li>
+                                        <li>Copies: {{ $training->copies }}</li>
+                                        <li>Total Price: RM{{ number_format($training->total_price, 2) }}</li>
+                                        <li>Status: {{ $training->payment_status }}</li>
+                                        <li>Time: {{ \Carbon\Carbon::parse($training->time)->format('d-m-Y H:i') }}</li>
+                                      </ul>
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                              @php
-                                $currentOrderId = $training->order_id;
-                              @endphp
-                              @endforeach
+                                @endforeach
+                              </div> <!-- Close last container -->
                             </div>
                           </div>
                         </div>
                       </div>
-
                     </div>
                   </div>
                 </div>
@@ -83,6 +81,9 @@
       </div>
     </div>
   </div>
+
+
+
 
 
 

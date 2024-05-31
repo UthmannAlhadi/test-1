@@ -60,9 +60,18 @@ Route::middleware('auth')->group(function () {
     Route::get('/checkout', [StripePaymentController::class, 'checkout'])->name('checkout');
     Route::get('/payment-success', [StripePaymentController::class, 'success'])->name('payment.success');
     Route::get('/print-history', [StripePaymentController::class, 'printHistory'])->name('user.print-history');
+    Route::get('/admin-update-order', [StripePaymentController::class, 'adminUpdateOrder'])->name('user.admin-update-order');
+    Route::post('/update-payment', [StripePaymentController::class, 'updatePayment'])->name('update.payment');
+    Route::post('/delete-order', [StripePaymentController::class, 'deleteOrder'])->name('delete.order');
+
+
 
     // Admin Sales
     Route::get('/user/admin-sales', [SalesController::class, 'displaySales'])->name('user.admin-sales');
+    Route::get('dashboard', [\App\Http\Controllers\UserController::class, 'index'])->name('dashboard');
+
+    // Admin Print History
+
 
 
 });

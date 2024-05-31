@@ -148,4 +148,51 @@ class StripePaymentController extends Controller
         return strtoupper(Str::random(5)); // Generates a random string of 5 characters in uppercase
     }
 
+    public function adminUpdateOrder()
+    {
+        // Retrieve order IDs where there's at least one training with 'pending' payment status
+        $ordersWithPending = DB::table('trainings')
+            ->select('order_id')
+            ->where('payment_status', 'pending')
+            ->groupBy('order_id')
+            ->get()
+            ->pluck('order_id')
+            ->toArray();
+
+        // Retrieve all trainings with order IDs that have pending payments
+        $trainings = Training::whereIn('order_id', $ordersWithPending)->get();
+
+        return view('user.admin-update-order', compact('trainings'));
+    }
+
+    public function updatePayment(Request $request)
+    {
+        $orderId = $request->input('order_id');
+        \Log::info('Updating payment for order ID: ' . $orderId);
+
+        if (!$orderId) {
+            return redirect()->back()->withErrors(['error' => 'Order ID not found.']);
+        }
+
+        // Update the payment status in the database
+        DB::table('trainings')->where('order_id', $orderId)->update(['payment_status' => 'Paid']);
+
+        return redirect()->back()->with('success', 'Payment status updated successfully.');
+    }
+
+    public function deleteOrder(Request $request)
+    {
+        $orderId = $request->input('order_id');
+
+        if (!$orderId) {
+            return redirect()->back()->withErrors(['error' => 'Order ID not found.']);
+        }
+
+        // Delete the order from the database
+        DB::table('trainings')->where('order_id', $orderId)->delete();
+
+        return redirect()->back()->with('success', 'Order deleted successfully.');
+    }
+
+
 }
