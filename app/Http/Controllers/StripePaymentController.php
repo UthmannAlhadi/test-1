@@ -57,6 +57,26 @@ class StripePaymentController extends Controller
             return redirect()->route('user.print-history');
         }
 
+        // Handle cash payment separately
+        if ($paymentMethod === 'qr') {
+            // Clear session data related to print-preview and training-list
+            session()->forget(['total_price', 'trainings', 'uploaded_training_ids']);
+            Session::forget('printing_color_option');
+            Session::forget('layout_option');
+            Session::forget('copies');
+            Session::forget('total_price');
+            Session::forget('trainings');
+            Session::forget('uploaded_training_ids');
+            Session::forget('total_pages');
+            Session::forget('training_page');
+            Session::forget('page');
+            Session::forget('image_path');
+            Session::forget('training');
+
+            \Log::info('Session data after clearing in checkout (qr): ', session()->all());
+            return redirect()->route('user.print-history');
+        }
+
         $stripeSecret = env('STRIPE_SECRET');
         \Log::info('STRIPE_SECRET value: ' . $stripeSecret);
         $stripe = new StripeClient($stripeSecret);

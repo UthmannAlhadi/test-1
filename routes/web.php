@@ -68,7 +68,7 @@ Route::middleware('auth')->group(function () {
 
     // Admin Sales
     Route::get('/user/admin-sales', [SalesController::class, 'displaySales'])->name('user.admin-sales');
-    Route::get('dashboard', [\App\Http\Controllers\UserController::class, 'index'])->name('dashboard');
+    Route::get('/user/admin-sales', [\App\Http\Controllers\UserController::class, 'index'])->name('user.admin-sales');
 
     // Admin Print History
 

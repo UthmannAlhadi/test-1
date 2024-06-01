@@ -1,106 +1,63 @@
-{{-- <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
-    <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-            <div class="flex">
-                <!-- Logo -->
-                <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
-                    </a>
-                </div>
-
-                <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
-                </div>
-            </div>
-
-            <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ms-6">
-                <x-dropdown align="right" width="48">
-                    <x-slot name="trigger">
-                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                            <div>{{ Auth::user()->name }}</div>
-
-                            <div class="ms-1">
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                        </button>
-                    </x-slot>
-
-                    <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
-                        </x-dropdown-link>
-
-                        <!-- Authentication -->
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-
-                            <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
-                                                this.closest('form').submit();">
-                                {{ __('Log Out') }}
-                            </x-dropdown-link>
-                        </form>
-                    </x-slot>
-                </x-dropdown>
-            </div>
-
-            <!-- Hamburger -->
-            <div class="-me-2 flex items-center sm:hidden">
-                <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
-                    <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                        <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
-            </x-responsive-nav-link>
-        </div>
-
-        <!-- Responsive Settings Options -->
-        <div class="pt-4 pb-1 border-t border-gray-200">
-            <div class="px-4">
-                <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
-                <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
-            </div>
-
-            <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('profile.edit')">
-                    {{ __('Profile') }}
-                </x-responsive-nav-link>
-
-                <!-- Authentication -->
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-
-                    <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                        {{ __('Log Out') }}
-                    </x-responsive-nav-link>
-                </form>
-            </div>
-        </div>
-    </div>
-</nav> --}}
 <header
-  class="sticky top-0 inset-x-0 flex flex-wrap sm:justify-start sm:flex-nowrap z-[48] w-full bg-white border-b text-sm py-2.5 sm:py-3 lg:ps-64 dark:bg-gray-800 dark:border-gray-700 border-gray-400">
+  class="sticky top-0 inset-x-0 flex flex-wrap sm:justify-start sm:flex-nowrap z-[48] w-full bg-white border-b text-sm py-2.5 sm:py-3 lg:ps-64 dark:bg-gray-800 dark:border-gray-700 border-gray-300">
   <div class="w-full flex items-center justify-between sm:gap-x-3 sm:order-3">
+    <div class="w-full flex flex-row items-center justify-center">
+      {{-- <svg version="1.1" id="Layer_1" class="w-auto h-4 sm:h-6" xmlns="http://www.w3.org/2000/svg" x="0" y="0"
+        viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve">
+        <style>
+          .st0 {
+            fill: #6770e6
+          }
+
+          .st1 {
+            fill: #5861c7
+          }
+
+          .st6 {
+            fill: #69ebfc
+          }
+
+          .st16 {
+            fill: #fff7f2
+          }
+        </style>
+        <path
+          d="M108.201-.256c-15.734 0-28.482 12.748-28.482 28.482v49.912l56.964.001V28.226c0-15.735-12.757-28.482-28.482-28.482z"
+          style="fill:#5fd4e3" />
+        <path class="st0"
+          d="M425.205 105H86.795C38.86 105 0 143.86 0 191.795v65.203C0 273.015 12.985 286 29.002 286h453.996C499.015 286 512 273.015 512 256.998v-65.203C512 143.86 473.14 105 425.205 105z" />
+        <path class="st1" d="M25 286h48v199H25z" />
+        <path class="st0"
+          d="M80.705 512h-63.41A7.295 7.295 0 0 1 10 504.705v-12.411a7.295 7.295 0 0 1 7.295-7.295h63.411a7.295 7.295 0 0 1 7.295 7.295v12.411A7.296 7.296 0 0 1 80.705 512z" />
+        <path class="st1" d="M439 286h48v199h-48z" />
+        <path class="st0"
+          d="M494.705 512h-63.411a7.295 7.295 0 0 1-7.295-7.295v-12.411a7.295 7.295 0 0 1 7.295-7.295h63.411a7.295 7.295 0 0 1 7.295 7.295v12.411a7.295 7.295 0 0 1-7.295 7.295z" />
+        <path d="M0 216v40.998C0 273.015 12.985 286 29.002 286h453.996C499.016 286 512 273.015 512 256.998V216H0z"
+          style="fill:#d476e2" />
+        <path style="fill:#b665c2" d="M95 216h322v70H95z" />
+        <path d="M378.5 261h-245c-5.523 0-10-4.477-10-10s4.477-10 10-10h245c5.523 0 10 4.477 10 10s-4.477 10-10 10z"
+          style="fill:#339" />
+        <circle class="st6" cx="69.5" cy="181.5" r="13.5" />
+        <path class="st6" d="M150.5 187h-50a5.5 5.5 0 1 1 0-11h50a5.5 5.5 0 1 1 0 11z" />
+        <path class="st1"
+          d="M417 105V43.899A8.899 8.899 0 0 0 408.101 35H103.899A8.899 8.899 0 0 0 95 43.899V105h322z" />
+        <path id="XMLID_499_" class="st6"
+          d="M350.591-.256H108.198c15.732 0 28.482 12.751 28.482 28.482V105h242.393V28.226c0-15.732-12.76-28.482-28.482-28.482z" />
+        <path
+          d="M350.591-.256H108.198c11.613 0 21.595 6.952 26.029 16.918h216.364c15.722 0 28.482 12.751 28.482 28.482V28.226c0-15.732-12.76-28.482-28.482-28.482z"
+          style="fill:#a1f1fc" />
+        <path class="st6"
+          d="M136.701 248.628V484.33c0 15.421 12.503 27.924 27.924 27.924h214.453V248.628H136.701z" />
+        <path id="XMLID_500_"
+          d="m351.148 454.756-158.6.001v29.573c0 15.421-12.494 27.924-27.924 27.924h214.347l.102.002c15.424 0 27.926-12.502 27.926-27.926v-29.575h-55.851z"
+          style="fill:#5ed4e3" />
+        <path
+          d="m379.074 495.338-.102-.002H190.293c-4.27 9.949-14.15 16.918-25.669 16.918h214.347l.102.003c15.424 0 27.926-12.502 27.926-27.926v-16.918c.001 15.423-12.501 27.925-27.925 27.925z"
+          style="fill:#56c1cf" />
+        <path class="st16"
+          d="M256.168 296.561h-86.756a7.5 7.5 0 0 1-7.501-7.501 7.5 7.5 0 0 1 7.501-7.501h86.756a7.5 7.5 0 0 1 7.501 7.501 7.5 7.5 0 0 1-7.501 7.501zM341.168 296.561h-56.756a7.5 7.5 0 0 1-7.501-7.501 7.5 7.5 0 0 1 7.501-7.501h56.756a7.5 7.5 0 0 1 7.501 7.501 7.5 7.5 0 0 1-7.501 7.501zM316.168 340.095H169.412a7.5 7.5 0 0 1-7.501-7.501 7.5 7.5 0 0 1 7.501-7.501h146.756a7.5 7.5 0 0 1 7.501 7.501 7.5 7.5 0 0 1-7.501 7.501zM346.168 388.095H169.412a7.5 7.5 0 0 1-7.501-7.501 7.5 7.5 0 0 1 7.501-7.501h176.756a7.5 7.5 0 0 1 7.501 7.501 7.5 7.5 0 0 1-7.501 7.501z" />
+      </svg> --}}
+    </div>
     <div class="flex flex-row items-center justify-end ml-auto px-6"> <!-- Added ml-auto to push it to the right -->
       <!-- Notification Button -->
       <button type="button"

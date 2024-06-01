@@ -13,13 +13,13 @@ class MonthlyUsersChart
         $this->chart = $chart;
     }
 
-    public function build(): \ArielMejiaDev\LarapexCharts\lineChart
+    public function build(): \ArielMejiaDev\LarapexCharts\BarChart
     {
-        return $this->chart->lineChart()
-            ->setTitle('Users.')
+        return $this->chart->BarChart()
+            ->setTitle('Income. ')
             ->setSubtitle('$2.5K.')
-            ->addData('Active Users', [86, 79, 66, 54, 43, 60, 56, 49, 43, 54, 38, 53])
-            ->addData('Inactive Users', [70, 33, 88, 24, 68, 40, 56, 39, 13, 44, 18, 33])
+            ->addData('Active Users', [46, 39, 26, 44, 43, 30, 46, 49, 43, 24, 48, 23])
+            ->addData('Inactive Users', [40, 33, 18, 24, 48, 40, 16, 39, 13, 44, 18, 33])
             ->setXAxis(['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']);
     }
 }

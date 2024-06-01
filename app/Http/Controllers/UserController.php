@@ -14,7 +14,7 @@ class UserController extends Controller
 
     public function index(MonthlyUsersChart $chart)
     {
-        return view('dashboard', ['chart' => $chart->build()]);
+        return view('user.admin-sales', ['chart' => $chart->build()]);
     }
 
     /**
