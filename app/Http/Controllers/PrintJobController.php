@@ -46,6 +46,12 @@ class PrintJobController extends Controller
         return view('user.admin-print-job');
     }
 
+    public function displayAdminReceipt()
+    {
+
+        return view('user.admin-receipt');
+    }
+
     public function index()
     {
         //

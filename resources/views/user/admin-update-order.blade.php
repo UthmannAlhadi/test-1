@@ -92,6 +92,7 @@
                                       <li>Total Price: RM{{ number_format($training->total_price, 2) }}</li>
                                       <li>Status: {{ $training->payment_status }}</li>
                                       <li>Time: {{ \Carbon\Carbon::parse($training->time)->format('d-m-Y H:i') }}</li>
+                                      <li>Payment Method: {{ $training->payment_method }}</li>
                                     </ul>
                                   </div>
                                 </div>

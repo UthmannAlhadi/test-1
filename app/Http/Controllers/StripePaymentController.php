@@ -35,6 +35,7 @@ class StripePaymentController extends Controller
             'total_price' => $price,
             'time' => $currentTime,
             'payment_status' => $paymentMethod === 'cash' ? 'Pending' : 'Unpaid',
+            'payment_method' => $paymentMethod,
         ]);
 
         // Handle cash payment separately
@@ -179,8 +180,20 @@ class StripePaymentController extends Controller
             ->pluck('order_id')
             ->toArray();
 
-        // Retrieve all trainings with order IDs that have pending payments
-        $trainings = Training::whereIn('order_id', $ordersWithPending)->get();
+        $ordersWithUnpaid = DB::table('trainings')
+            ->select('order_id')
+            ->where('payment_status', 'unpaid')
+            ->groupBy('order_id')
+            ->get()
+            ->pluck('order_id')
+            ->toArray();
+
+        // Merge both arrays of order IDs
+        $orderIDs = array_unique(array_merge($ordersWithPending, $ordersWithUnpaid));
+
+        // Retrieve all trainings with order IDs that have either pending or unpaid payments
+        $trainings = Training::whereIn('order_id', $orderIDs)->get();
+
 
         return view('user.admin-update-order', compact('trainings'));
     }
@@ -212,6 +225,41 @@ class StripePaymentController extends Controller
         DB::table('trainings')->where('order_id', $orderId)->delete();
 
         return redirect()->back()->with('success', 'Order deleted successfully.');
+    }
+
+    public function uploadReceipt(Request $request)
+    {
+        $request->validate([
+            'receipt' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        if ($request->hasFile('receipt')) {
+            $fileName = time() . '.' . $request->receipt->extension();
+            $request->receipt->move(public_path('uploads'), $fileName);
+
+            Payment::create([
+                'receipt' => $fileName,
+            ]);
+
+            return redirect()->route('checkout', ['payment_method' => $request->payment_method]);
+        }
+
+        return back()->with('error', 'File upload failed.');
+    }
+
+    public function index()
+    {
+        $receipts = Payment::all();
+        // Retrieve all trainings
+        $trainings = Training::all();
+        return view('user.admin-receipt', compact('receipts', 'trainings'));
+    }
+
+    public function showReceipts()
+    {
+        // Eager load the training data for each receipt
+        $receipts = Payment::with('training')->get();
+        return view('admin-receipt', compact('receipts'));
     }
 
 

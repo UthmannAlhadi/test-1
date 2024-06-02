@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->string('payment_status')->default('pending'); // Default status
             $table->decimal('total_price', 10, 2)->nullable();
             $table->timestamp('time')->nullable();
+            $table->string('payment_method')->nullable();
         });
     }
 
@@ -34,6 +35,7 @@ return new class extends Migration {
             $table->dropColumn('payment_status');
             $table->dropColumn('total_price');
             $table->dropColumn('time');
+            $table->dropColumn('payment_method');
         });
     }
 };

@@ -202,8 +202,23 @@
                 <path stroke-linecap="round" stroke-linejoin="round"
                   d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12A2.25 2.25 0 0 0 20.25 18V6A2.25 2.25 0 0 0 18 3.75H6A2.25 2.25 0 0 0 3.75 6v12A2.25 2.25 0 0 0 6 20.25Z" />
               </svg>
-
-              Admin Sales
+              Sales
+            </a>
+          </li>
+          <!-- Admin Receipt Button -->
+          <li>
+            <a href="{{ route('user.admin-receipt') }}"
+              class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg hover:bg-blue-500 dark:hover:bg-gray-900 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600
+                {{ Route::is('user.admin-receipt') ? 'bg-blue-400 text-white' : 'text-slate-700 dark:bg-gray-800' }}">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" class="flex-shrink-0 size-5">
+                <path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z" />
+                <path d="M14 8H8" />
+                <path d="M16 12H8" />
+                <path d="M13 16H8" />
+              </svg>
+              Receipt
             </a>
           </li>
         @endif

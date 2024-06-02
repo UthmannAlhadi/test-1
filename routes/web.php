@@ -3,9 +3,9 @@
 use App\Http\Controllers\PrintJobController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SalesController;
-use App\Http\Controllers\UploadController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\StripeWebhookController;
+use App\Http\Controllers\TrainingController;
 use App\Http\Controllers\StripePaymentController;
 
 /*
@@ -41,20 +41,21 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/print-preview', [PrintJobController::class, 'displayPreview'])->name('user.print-preview');
     Route::get('/user/print-history', [PrintJobController::class, 'displayPrintHistory'])->name('user.print-history');
     Route::get('/user/admin-print-job', [PrintJobController::class, 'displayAdminPrintJob'])->name('user.admin-print-job');
+    Route::get('/user/admin-receipt', [PrintJobController::class, 'displayAdminReceipt'])->name('user.admin-receipt');
 
 
     // Upload File
-    Route::get('/user/print-upload', [\App\Http\Controllers\TrainingController::class, 'getTrainingList'])->name('user.print-upload');
-    Route::post('/user.print-upload', [\App\Http\Controllers\TrainingController::class, 'postAddTraining'])->name('user.print-upload');
-    Route::get('/user/traing-form', [\App\Http\Controllers\TrainingController::class, 'getTrainingForm'])->name('user.training-form');
-    Route::get('/user/training-list', [\App\Http\Controllers\TrainingController::class, 'getTrainingList'])->name('user.training-list');
-    Route::get('/user/print-preview', [\App\Http\Controllers\TrainingController::class, 'printPreview'])->name('user.print-preview');
-    Route::post('/user/print-preview', [\App\Http\Controllers\TrainingController::class, 'printPreview'])->name('user.print-preview'); //test
-    Route::post('/user/add-training', [\App\Http\Controllers\TrainingController::class, 'postAddTraining'])->name('user.add-training');
-    Route::post('/user/delete-training', [\App\Http\Controllers\TrainingController::class, 'DeleteTraining'])->name('user.delete-training');
-    Route::post('/user/update-document-display', [\App\Http\Controllers\TrainingController::class, 'updateDocumentDisplay'])->name('user.update-document-display');
-    Route::post('user/update-preferences', [\App\Http\Controllers\TrainingController::class, 'updatePreferences'])->name('user.update-preferences');
-    Route::post('user/cancel-preview', [\App\Http\Controllers\TrainingController::class, 'cancelPreview'])->name('user.cancel-preview');
+    Route::get('/user/print-upload', [TrainingController::class, 'getTrainingList'])->name('user.print-upload');
+    Route::post('/user.print-upload', [TrainingController::class, 'postAddTraining'])->name('user.print-upload');
+    Route::get('/user/traing-form', [TrainingController::class, 'getTrainingForm'])->name('user.training-form');
+    Route::get('/user/training-list', [TrainingController::class, 'getTrainingList'])->name('user.training-list');
+    Route::get('/user/print-preview', [TrainingController::class, 'printPreview'])->name('user.print-preview');
+    Route::post('/user/print-preview', [TrainingController::class, 'printPreview'])->name('user.print-preview'); //test
+    Route::post('/user/add-training', [TrainingController::class, 'postAddTraining'])->name('user.add-training');
+    Route::post('/user/delete-training', [TrainingController::class, 'DeleteTraining'])->name('user.delete-training');
+    Route::post('/user/update-document-display', [TrainingController::class, 'updateDocumentDisplay'])->name('user.update-document-display');
+    Route::post('user/update-preferences', [TrainingController::class, 'updatePreferences'])->name('user.update-preferences');
+    Route::post('user/cancel-preview', [TrainingController::class, 'cancelPreview'])->name('user.cancel-preview');
 
     // Payment method
     Route::get('/checkout', [StripePaymentController::class, 'checkout'])->name('checkout');
@@ -63,12 +64,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin-update-order', [StripePaymentController::class, 'adminUpdateOrder'])->name('user.admin-update-order');
     Route::post('/update-payment', [StripePaymentController::class, 'updatePayment'])->name('update.payment');
     Route::post('/delete-order', [StripePaymentController::class, 'deleteOrder'])->name('delete.order');
+    Route::post('/upload-receipt', [StripePaymentController::class, 'uploadReceipt'])->name('upload.receipt');
+    Route::get('/user/admin-receipt', [StripePaymentController::class, 'index'])->name('user.admin-receipt');
 
 
 
     // Admin Sales
     Route::get('/user/admin-sales', [SalesController::class, 'displaySales'])->name('user.admin-sales');
-    Route::get('/user/admin-sales', [\App\Http\Controllers\UserController::class, 'index'])->name('user.admin-sales');
+    Route::get('/user/admin-sales', [UserController::class, 'index'])->name('user.admin-sales');
 
     // Admin Print History
 

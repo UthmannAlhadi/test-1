@@ -15,4 +15,6 @@ class Training extends Model
         'layout_option',
         'copies',
     ];
+
+
 }
