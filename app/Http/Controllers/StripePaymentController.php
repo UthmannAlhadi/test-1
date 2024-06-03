@@ -117,6 +117,7 @@ class StripePaymentController extends Controller
     public function success(Request $request)
     {
         $orderId = $request->query('order_id');
+        $userId = auth()->user()->user_id; // Get the authenticated user's ID
 
         if (!$orderId) {
             return redirect()->route('user.print-preview')->withErrors(['error' => 'Order ID not found.']);
@@ -125,9 +126,25 @@ class StripePaymentController extends Controller
         // Update the payment status in the database
         DB::table('trainings')->where('order_id', $orderId)->update(['payment_status' => 'Paid']);
 
+
+        // Retrieve the user's orders
+        $orders = DB::table('trainings')
+            ->select('order_id', DB::raw('SUM(total_price) as total_price'))
+            ->where('user_id', $userId) // Filter by the authenticated user's ID
+            ->where('payment_status', 'paid')
+            ->groupBy('order_id')
+            ->get();
+
+        // Retrieve the user's trainings by order
+        $trainingsByOrder = DB::table('trainings')
+            ->where('user_id', $userId) // Filter by the authenticated user's ID
+            ->whereIn('order_id', $orders->pluck('order_id'))
+            ->get()
+            ->groupBy('order_id');
+
         // Retrieve the trainings associated with this order ID
         // $trainings = Training::where('order_id', $orderId)->get();
-        $trainings = Training::all();
+        $trainings = Training::where('user_id', $userId)->get();
 
         return view('user.print-history', compact('trainings', 'orderId'));
     }
