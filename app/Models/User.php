@@ -42,4 +42,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    protected $primaryKey = 'user_id';
+
+    // If you are using Eloquent relationships, update the foreign key references
+    public function trainings()
+    {
+        return $this->hasMany(Training::class, 'user_id', 'user_id');
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

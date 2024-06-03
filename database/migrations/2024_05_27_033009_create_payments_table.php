@@ -14,6 +14,8 @@ return new class extends Migration {
             $table->id();
             $table->timestamps();
             $table->string('receipt')->nullable();
+            $table->string('order_id')->nullable();
+            $table->string('payment_method')->nullable();
         });
     }
 

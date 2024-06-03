@@ -32,5 +32,14 @@ class UserSeed extends Seeder
             'password' => Hash::make('12345678'),
         ]);
 
+        DB::table('users')->insert([
+            'name' => 'uthmann',
+            'email' => 'uthmann@example.com',
+            'role' => 'customer',
+            /*  'matric_number' => 'test',
+             'exco' => 'test', */
+            'password' => Hash::make('12345678'),
+        ]);
+
     }
 }

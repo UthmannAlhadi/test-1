@@ -160,11 +160,11 @@
         </li>
       @else
         @if (auth()->user()->role == 'admin')
-          <!-- Admin Print Job Button -->
+          <!-- Admin Print History Button -->
           <li>
-            <a href="{{ route('user.print-history') }}"
+            <a href="{{ route('user.admin-print-history') }}"
               class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg hover:bg-blue-500 dark:hover:bg-gray-900 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600
-                {{ Route::is('user.print-history') ? 'bg-blue-400 text-white' : 'text-slate-700 dark:bg-gray-800' }}">
+                {{ Route::is('user.admin-print-history') ? 'bg-blue-400 text-white' : 'text-slate-700 dark:bg-gray-800' }}">
               <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                 stroke-linejoin="round">

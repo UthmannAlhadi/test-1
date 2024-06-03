@@ -197,8 +197,7 @@
             </button>
           </div>
           <div class="p-4 overflow-y-auto">
-            <form id="paymentForm" action="{{ route('upload.receipt') }}" method="POST"
-              enctype="multipart/form-data">
+            <form id="paymentForm" action="{{ route('checkout') }}" method="GET" enctype="multipart/form-data">
               @csrf
               <div class="flex flex-col gap-y-3">
                 <div class="flex">
@@ -272,37 +271,40 @@
             </label>
           </div>
           <!-- End Col -->
-          <div class="sm:col-span-9 px-2">
-            <label for="af-submit-application-resume-cv" class="sr-only">Choose file</label>
-            <input type="file" name="receipt" id="receipt" form="paymentForm" required
-              class="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400
-                file:border-0
-                file:bg-gray-100 file:me-4
-                file:py-2 file:px-4
-                dark:file:bg-neutral-700 dark:file:text-neutral-400">
-          </div>
-          <span class="flex flex-row items-center justify-end ml-auto text-xs text-red-500 my-2 px-4">*Image
-            only</span>
-          <!-- End Col -->
-          <!-- Buttons -->
-          <div class="flex justify-end items-center gap-x-2 py-3 px-4 ">
-            <button type="button"
-              class="py-2 px-2 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 text-red-700 bg-red-100 hover:bg-red-200 dark:bg-red-900 dark:text-red-400 disabled:pointer-events-none dark:hover:bg-red-800 dark:hover:text-red-300"
-              id="closeQRCodeModalButton" data-hs-overlay="#qrCodeModal">
-              Close
-            </button>
-            <button type="submit" id="donePaymentButton" form="paymentForm"
-              class="py-2 px-4 mx-2 inline-flex my-5 items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-100 text-blue-800 hover:bg-blue-200 disabled:opacity-50 disabled:pointer-events-none dark:hover:bg-blue-900 dark:text-blue-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
-              Done Payment
-            </button>
-          </div>
+          <!-- QR Form -->
+          <form id="paymentQRForm" action="{{ route('upload.receipt') }}" method="POST"
+            enctype="multipart/form-data">
+            @csrf
+            <div class="sm:col-span-9 px-2">
+              <label for="receipt" class="sr-only">Choose file</label>
+              <input type="file" id="receipt" name="receipt" required
+                class="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400
+          file:border-0
+          file:bg-gray-100 file:me-4
+          file:py-2 file:px-4
+          dark:file:bg-neutral-700 dark:file:text-neutral-400">
+            </div>
+            <input type="hidden" name="payment_method" value="qr">
+            <span class="flex flex-row items-center justify-end ml-auto text-xs text-red-500 my-2 px-4">*Image
+              only</span>
+            <!-- End Col -->
+            <!-- Buttons -->
+            <div class="flex justify-end items-center gap-x-2 py-3 px-4 ">
+              <button type="button"
+                class="py-2 px-2 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 text-red-700 bg-red-100 hover:bg-red-200 dark:bg-red-900 dark:text-red-400 disabled:pointer-events-none dark:hover:bg-red-800 dark:hover:text-red-300"
+                id="closeQRCodeModalButton" data-hs-overlay="#qrCodeModal">
+                Close
+              </button>
+              <button type="submit" id="donePaymentButton"
+                class="py-2 px-4 mx-2 inline-flex my-5 items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-100 text-blue-800 hover:bg-blue-200 disabled:opacity-50 disabled:pointer-events-none dark:hover:bg-blue-900 dark:text-blue-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+                Done Payment
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
-
-
   </div>
-
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -311,10 +313,11 @@
       const closeQRCodeModal = document.getElementById('closeQRCodeModal');
       const closeQRCodeModalButton = document.getElementById('closeQRCodeModalButton');
       const hsVerticallyCenteredModal = document.getElementById('hs-vertically-centered-modal');
+      const donePaymentButton = document.getElementById('donePaymentButton');
 
       submitPaymentFormButton.addEventListener('click', () => {
-        const selectedPaymentMethod = document.querySelector('input[name="payment_method"]:checked').value;
-        if (selectedPaymentMethod === 'qr') {
+        const selectedPaymentMethod = document.querySelector('input[name="payment_method"]:checked');
+        if (selectedPaymentMethod && selectedPaymentMethod.value === 'qr') {
           qrCodeModal.classList.remove('hidden');
           hsVerticallyCenteredModal.classList.add('hidden');
         } else {
@@ -330,16 +333,15 @@
         qrCodeModal.classList.add('hidden');
       });
 
+      donePaymentButton.addEventListener('click', () => {
+        document.getElementById('paymentQRForm').submit();
+      });
+
       const closePaymentModalButton = document.querySelector('[data-hs-overlay="#hs-vertically-centered-modal"]');
       closePaymentModalButton.addEventListener('click', () => {
         hsVerticallyCenteredModal.classList.add('hidden');
       });
     });
   </script>
-
-
-
-
-
 
 </x-app-layout>

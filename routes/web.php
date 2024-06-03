@@ -61,12 +61,17 @@ Route::middleware('auth')->group(function () {
     Route::get('/checkout', [StripePaymentController::class, 'checkout'])->name('checkout');
     Route::get('/payment-success', [StripePaymentController::class, 'success'])->name('payment.success');
     Route::get('/print-history', [StripePaymentController::class, 'printHistory'])->name('user.print-history');
+    Route::get('/admin-print-history', [StripePaymentController::class, 'adminPrintHistory'])->name('user.admin-print-history');
     Route::get('/admin-update-order', [StripePaymentController::class, 'adminUpdateOrder'])->name('user.admin-update-order');
     Route::post('/update-payment', [StripePaymentController::class, 'updatePayment'])->name('update.payment');
     Route::post('/delete-order', [StripePaymentController::class, 'deleteOrder'])->name('delete.order');
     Route::post('/upload-receipt', [StripePaymentController::class, 'uploadReceipt'])->name('upload.receipt');
     Route::get('/user/admin-receipt', [StripePaymentController::class, 'index'])->name('user.admin-receipt');
 
+
+
+
+    // Dashboard Admin
 
 
     // Admin Sales

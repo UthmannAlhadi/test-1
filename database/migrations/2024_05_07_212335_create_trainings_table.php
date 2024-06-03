@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->timestamps();
             $table->string('photo')->nullable();
+            $table->integer('total_pages')->nullable();
         });
     }
 

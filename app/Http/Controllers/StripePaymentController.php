@@ -27,6 +27,7 @@ class StripePaymentController extends Controller
         $paymentMethod = $request->input('payment_method');
         $orderId = $this->generateOrderId(); // Generate a unique order ID
         $currentTime = Carbon::now('Asia/Kuala_Lumpur'); // Get the current timestamp
+        $userId = auth()->user()->user_id; // Get the authenticated user's ID
 
         // Store the order ID and total price in the trainings table
         $trainingIds = session()->get('uploaded_training_ids');
@@ -36,10 +37,16 @@ class StripePaymentController extends Controller
             'time' => $currentTime,
             'payment_status' => $paymentMethod === 'cash' ? 'Pending' : 'Unpaid',
             'payment_method' => $paymentMethod,
+            'user_id' => $userId, // Add the user_id here
         ]);
 
-        // Handle cash payment separately
-        if ($paymentMethod === 'cash') {
+        // Update the order_id in the payments table
+        DB::table('payments')->where('payment_method', $paymentMethod)
+            ->whereNull('order_id')
+            ->update(['order_id' => $orderId]);
+
+        // Handle cash & qr payment separately
+        if ($paymentMethod === 'cash' || $paymentMethod === 'qr') {
             // Clear session data related to print-preview and training-list
             session()->forget(['total_price', 'trainings', 'uploaded_training_ids']);
             Session::forget('printing_color_option');
@@ -54,27 +61,7 @@ class StripePaymentController extends Controller
             Session::forget('image_path');
             Session::forget('training');
 
-            \Log::info('Session data after clearing in checkout (cash): ', session()->all());
-            return redirect()->route('user.print-history');
-        }
-
-        // Handle cash payment separately
-        if ($paymentMethod === 'qr') {
-            // Clear session data related to print-preview and training-list
-            session()->forget(['total_price', 'trainings', 'uploaded_training_ids']);
-            Session::forget('printing_color_option');
-            Session::forget('layout_option');
-            Session::forget('copies');
-            Session::forget('total_price');
-            Session::forget('trainings');
-            Session::forget('uploaded_training_ids');
-            Session::forget('total_pages');
-            Session::forget('training_page');
-            Session::forget('page');
-            Session::forget('image_path');
-            Session::forget('training');
-
-            \Log::info('Session data after clearing in checkout (qr): ', session()->all());
+            \Log::info('Session data after clearing in checkout (' . $paymentMethod . '): ', session()->all());
             return redirect()->route('user.print-history');
         }
 
@@ -147,21 +134,50 @@ class StripePaymentController extends Controller
 
     public function printHistory()
     {
+        $userId = auth()->user()->user_id; // Get the authenticated user's ID
+
+        // Retrieve the user's orders
         $orders = DB::table('trainings')
             ->select('order_id', DB::raw('SUM(total_price) as total_price'))
+            ->where('user_id', $userId) // Filter by the authenticated user's ID
             ->where('payment_status', 'paid')
             ->groupBy('order_id')
             ->get();
 
+        // Retrieve the user's trainings by order
+        $trainingsByOrder = DB::table('trainings')
+            ->where('user_id', $userId) // Filter by the authenticated user's ID
+            ->whereIn('order_id', $orders->pluck('order_id'))
+            ->get()
+            ->groupBy('order_id');
+
+        // Retrieve all trainings for the authenticated user
+        $trainings = Training::where('user_id', $userId)->get();
+
+        return view('user.print-history', compact('orders', 'trainingsByOrder', 'trainings'));
+    }
+
+    public function adminPrintHistory()
+    {
+        $userId = auth()->user()->user_id; // Get the authenticated user's ID
+
+        // Retrieve the user's orders
+        $orders = DB::table('trainings')
+            ->select('order_id', DB::raw('SUM(total_price) as total_price'))
+            ->where('user_id', $userId) // Filter by the authenticated user's ID
+            ->where('payment_status', 'paid')
+            ->groupBy('order_id')
+            ->get();
+
+        // Retrieve the user's trainings by order
         $trainingsByOrder = DB::table('trainings')
             ->whereIn('order_id', $orders->pluck('order_id'))
             ->get()
             ->groupBy('order_id');
 
-        // Retrieve all trainings
         $trainings = Training::all();
 
-        return view('user.print-history', compact('orders', 'trainingsByOrder', 'trainings'));
+        return view('user.admin-print-history', compact('orders', 'trainingsByOrder', 'trainings'));
     }
 
     public function generateOrderId()
@@ -231,6 +247,7 @@ class StripePaymentController extends Controller
     {
         $request->validate([
             'receipt' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'payment_method' => 'required|string',
         ]);
 
         if ($request->hasFile('receipt')) {
@@ -239,6 +256,7 @@ class StripePaymentController extends Controller
 
             Payment::create([
                 'receipt' => $fileName,
+                'payment_method' => $request->payment_method,
             ]);
 
             return redirect()->route('checkout', ['payment_method' => $request->payment_method]);
@@ -249,11 +267,12 @@ class StripePaymentController extends Controller
 
     public function index()
     {
-        $receipts = Payment::all();
-        // Retrieve all trainings
-        $trainings = Training::all();
-        return view('user.admin-receipt', compact('receipts', 'trainings'));
+        // Retrieve all receipts with payment method 'qr' and related training data
+        $receipts = Payment::where('payment_method', 'qr')->with('training')->get();
+
+        return view('user.admin-receipt', compact('receipts'));
     }
+
 
     public function showReceipts()
     {
@@ -261,6 +280,5 @@ class StripePaymentController extends Controller
         $receipts = Payment::with('training')->get();
         return view('admin-receipt', compact('receipts'));
     }
-
 
 }

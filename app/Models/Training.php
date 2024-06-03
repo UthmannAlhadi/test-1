@@ -9,12 +9,12 @@ class Training extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'photo',
-        'printing_color_option',
-        'layout_option',
-        'copies',
-    ];
+    protected $fillable = ['order_id', 'total_price', 'time', 'payment_status', 'payment_method'];
+
+    public function payment()
+    {
+        return $this->belongsTo(Payment::class, 'order_id', 'order_id');
+    }
 
 
 }
