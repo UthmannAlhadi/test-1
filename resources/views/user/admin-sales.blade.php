@@ -110,31 +110,31 @@
       <!-- Toggle monthy / annual -->
       <div class="flex justify-between mb-3">
         <h2 class="text-xl font-bold md:text-4xl md:leading-tight dark:text-white">Sales Dashboard</h2>
-        <div id="toggle-count" class="p-0.5 inline-block bg-gray-100 rounded-lg dark:bg-neutral-700">
-          <label for="toggle-count-monthly" class="relative inline-block py-2 px-3">
+        {{-- <div id="toggle-count" class="p-0.5 inline-block bg-gray-100 rounded-lg dark:bg-neutral-700">
+          <label for="toggle-count-daily" class="relative inline-block py-2 px-3">
             <span
               class="inline-block relative z-10 text-sm font-medium text-gray-800 cursor-pointer dark:text-neutral-200">
               Daily
             </span>
-            <input id="toggle-count-monthly" name="toggle-count" type="radio"
+            <input id="toggle-count-daily" name="toggle-count" type="radio"
               class="absolute top-0 end-0 size-full border-transparent bg-transparent bg-none text-transparent rounded-lg cursor-pointer before:absolute before:inset-0 before:size-full before:rounded-lg focus:ring-offset-0 checked:before:bg-white checked:before:shadow-sm checked:bg-none focus:ring-transparent dark:checked:before:bg-neutral-800 dark:focus:ring-offset-transparent "
               checked="">
           </label>
-          <label for="toggle-count-annual" class="relative inline-block py-2 px-3">
+          <label for="toggle-count-monthly" class="relative inline-block py-2 px-3">
             <span
               class="inline-block relative z-10 text-sm font-medium text-gray-800 cursor-pointer dark:text-neutral-200">
               Monthly
             </span>
-            <input id="toggle-count-annual" name="toggle-count" type="radio"
+            <input id="toggle-count-monthly" name="toggle-count" type="radio"
               class="absolute top-0 end-0 size-full border-transparent bg-transparent bg-none text-transparent rounded-lg cursor-pointer before:absolute before:inset-0 before:size-full before:rounded-lg focus:ring-offset-0 checked:before:bg-white checked:before:shadow-sm checked:bg-none focus:ring-transparent dark:checked:before:bg-neutral-800 dark:focus:ring-offset-transparent">
           </label>
-        </div>
+        </div> --}}
       </div>
       <!-- End Toggle -->
 
       <!-- Card Grid -->
       <div class="grid grid-cols-4 lg:items-center bg-white border border-gray-200 rounded-xl dark:border-neutral-700">
-        <!-- Card -->
+        <!-- Number of sales -->
         <div class="flex flex-col p-4">
           <div class="flex justify-start items-center mb-1">
             <h4 class="text-gray-800 dark:text-neutral-200">Number of sales</h4>
@@ -157,68 +157,48 @@
           </div>
           <div class="flex gap-x-1">
             <span class="text-base font-normal text-gray-800 dark:text-neutral-200">RM</span>
-            <p data-hs-toggle-count='{
-              "target": "#toggle-count",
-              "min": "{{ number_format($dailyIncome, 2) }}",
-              "max": "{{ number_format($monthlyIncome, 2) }}"
-            }'
-              class="text-gray-800 font-semibold text-3xl dark:text-neutral-200">
+            <p class="text-gray-800 font-semibold text-3xl dark:text-neutral-200">
               {{ $dailyIncome }}
-              <!-- still x jadi -->
             </p>
           </div>
         </div>
         <!-- End Card -->
 
 
-        <!-- Card -->
+
+        <!-- Average Sales daily -->
         <div class="flex flex-col p-4">
           <div class="flex justify-between">
-            <h4 class="text-gray-800 mb-1 dark:text-neutral-200">Average sales per order</h4>
+            <h4 class="text-gray-800 mb-1 dark:text-neutral-200">Average sales daily</h4>
           </div>
           <div class="flex gap-x-1">
             <span class="text-base font-normal text-gray-800 dark:text-neutral-200">RM</span>
-            <p data-hs-toggle-count='{
-              "target": "#toggle-count",
-              "min": 89,
-              "max": 99
-            }'
-              class="text-gray-800 font-semibold text-3xl dark:text-neutral-200">
-              89
+            <p class="text-gray-800 font-semibold text-3xl dark:text-neutral-200">
+              {{ $averageDailySales }}
             </p>
           </div>
         </div>
         <!-- End Card -->
 
-        <!-- Card -->
+        <!-- Average sales monthly -->
         <div class="flex flex-col p-4">
-          <h4 class="text-gray-800 mb-1 dark:text-neutral-200">Cost</h4>
+          <h4 class="text-gray-800 mb-1 dark:text-neutral-200">Average sales monthly</h4>
           <div class="flex gap-x-1">
             <span class="text-base font-normal text-gray-800 dark:text-neutral-200">RM</span>
-            <p data-hs-toggle-count='{
-              "target": "#toggle-count",
-              "min": 129,
-              "max": 149
-            }'
-              class="text-gray-800 font-semibold text-3xl dark:text-neutral-200">
-              129
+            <p class="text-gray-800 font-semibold text-3xl dark:text-neutral-200">
+              {{ $averageMonthlySales }}
             </p>
           </div>
         </div>
         <!-- End Card -->
 
-        <!-- Card -->
+        <!-- Annual sales -->
         <div class="flex flex-col p-4">
-          <h4 class="text-gray-800 mb-1 dark:text-neutral-200">Profit</h4>
+          <h4 class="text-gray-800 mb-1 dark:text-neutral-200">Annual Sales</h4>
           <div class="flex gap-x-1">
             <span class="text-base font-normal text-gray-800 dark:text-neutral-200">RM</span>
-            <p data-hs-toggle-count='{
-              "target": "#toggle-count",
-              "min": 129,
-              "max": 149
-            }'
-              class="text-gray-800 font-semibold text-3xl dark:text-neutral-200">
-              129
+            <p class="text-gray-800 font-semibold text-3xl dark:text-neutral-200">
+              {{ $annualSales }}
             </p>
           </div>
         </div>
@@ -238,4 +218,6 @@
   <script src="{{ $chart->cdn() }}"></script>
 
   {{ $chart->script() }}
+
+
 </x-app-layout>

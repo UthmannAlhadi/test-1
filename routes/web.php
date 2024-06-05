@@ -42,12 +42,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/print-history', [PrintJobController::class, 'displayPrintHistory'])->name('user.print-history');
     Route::get('/user/admin-print-job', [PrintJobController::class, 'displayAdminPrintJob'])->name('user.admin-print-job');
     Route::get('/user/admin-receipt', [PrintJobController::class, 'displayAdminReceipt'])->name('user.admin-receipt');
+    Route::get('/user/admin-set-printer', [PrintJobController::class, 'displayAdminSetPrinter'])->name('user.admin-set-printer');
 
 
     // Upload File
     Route::get('/user/print-upload', [TrainingController::class, 'getTrainingList'])->name('user.print-upload');
     Route::post('/user.print-upload', [TrainingController::class, 'postAddTraining'])->name('user.print-upload');
-    Route::get('/user/traing-form', [TrainingController::class, 'getTrainingForm'])->name('user.training-form');
+    Route::get('/user/training-form', [TrainingController::class, 'getTrainingForm'])->name('user.training-form');
     Route::get('/user/training-list', [TrainingController::class, 'getTrainingList'])->name('user.training-list');
     Route::get('/user/print-preview', [TrainingController::class, 'printPreview'])->name('user.print-preview');
     Route::post('/user/print-preview', [TrainingController::class, 'printPreview'])->name('user.print-preview'); //test
@@ -78,7 +79,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/admin-sales', [SalesController::class, 'displaySales'])->name('user.admin-sales');
     Route::get('/user/admin-sales', [UserController::class, 'index'])->name('user.admin-sales');
 
-    // Admin Print History
+
+    // Admin Set Printer
+
 
 
 

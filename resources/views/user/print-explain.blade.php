@@ -64,6 +64,12 @@
   </ol>
   <!-- Chevrons Breadcrumbs End -->
 
+  <!-- title -->
+  <h1
+    class="flex relative justify-center w-4/6 mt-8 pb-0 font-medium ml-8 text-gray-900 text-xl lg:text-xl dark:text-neutral-200">
+    Step-by-step explanation before you start print job
+  </h1>
+
   <!-- Step by Step -->
   <section class="text-gray-600 body-font">
     <div class="container px-5 py-8 mx-auto flex flex-wrap">

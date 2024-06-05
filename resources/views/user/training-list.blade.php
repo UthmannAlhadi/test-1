@@ -184,6 +184,7 @@
                             <td>Copies</td>
                             <td>
                               <input type="number" name="copies" id="copies" value="1" min="1"
+                                max="100"
                                 class="border-gray-300 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 rounded-md">
                             </td>
                           </tr>
@@ -250,8 +251,15 @@
         }
       });
 
+
+
+
+
       // Update the hidden input field with the number of copies
       document.getElementById('copies').value = copies;
+      if (copies > 100) {
+        alert('The number of copies cannot exceed 100.');
+      }
 
       fetch('{{ route('user.update-preferences') }}', {
           method: 'POST',

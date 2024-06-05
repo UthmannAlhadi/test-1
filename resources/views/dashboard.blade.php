@@ -62,7 +62,8 @@
           <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
 
             <!-- Card Total Users -->
-            <div class="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-neutral-800 dark:border-neutral-700">
+            <div
+              class="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-neutral-800 dark:border-neutral-700 border-blue-400">
               <div class="p-4 md:p-5">
                 <div class="flex items-center gap-x-2">
                   <p class="text-xs uppercase tracking-wide text-gray-500 dark:text-neutral-500">
@@ -108,7 +109,8 @@
             <!-- End Card -->
 
             <!-- Total Order -->
-            <div class="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-neutral-800 dark:border-neutral-700">
+            <div
+              class="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-neutral-800 dark:border-neutral-700 border-blue-400">
               <div class="p-4 md:p-5">
                 <div class="flex items-center gap-x-2">
                   <p class="text-xs uppercase tracking-wide text-gray-500 dark:text-neutral-500">
@@ -126,7 +128,8 @@
             <!-- End Card -->
 
             <!-- Payment Method -->
-            <div class="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-neutral-800 dark:border-neutral-700">
+            <div
+              class="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-neutral-800 dark:border-neutral-700 border-blue-400">
               <div class="p-4 md:p-5">
                 <div class="flex items-center gap-x-2">
                   <p class="text-xs uppercase tracking-wide text-gray-500 dark:text-neutral-500">
@@ -155,7 +158,8 @@
             <!-- End Card -->
 
             <!-- Total Income -->
-            <div class="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-neutral-800 dark:border-neutral-700">
+            <div
+              class="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-neutral-800 dark:border-neutral-700 border-blue-400">
               <div class="p-4 md:p-5">
                 <div class="flex items-center gap-x-2">
                   <p class="text-xs uppercase tracking-wide text-gray-500 dark:text-neutral-500">
@@ -191,7 +195,7 @@
                       </p>
                     </div>
 
-                    <div>
+                    {{-- <div>
                       <div class="inline-flex gap-x-2">
                         <a class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800"
                           href="#">
@@ -209,7 +213,7 @@
                           Add user
                         </a>
                       </div>
-                    </div>
+                    </div> --}}
                   </div>
                   <!-- End Header -->
 
@@ -310,23 +314,30 @@
                             </div>
                           </td>
                           <td class="size-px whitespace-nowrap">
+                            @php
+                              $statusClasses =
+                                  $user->status == 'online'
+                                      ? 'bg-green-300 text-green-900 dark:bg-green-500/10 dark:text-green-500'
+                                      : 'bg-red-300 text-red-900 dark:bg-gray-500/10 dark:text-gray-500';
+                            @endphp
                             <div class="px-6 py-3">
                               <span
-                                class="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-teal-100 text-teal-800 rounded-full dark:bg-teal-500/10 dark:text-teal-500">
-                                @if ($user->status == 'Active')
+                                class="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium rounded-full {{ $statusClasses }}">
+                                @if ($user->status == 'online')
                                   <svg class="size-2.5" xmlns="http://www.w3.org/2000/svg" width="16"
                                     height="16" fill="currentColor" viewBox="0 0 16 16">
                                     <path
                                       d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
                                   </svg>
-                                  Active
+                                  Online
                                 @else
-                                  <svg class="size-2.5" xmlns="http://www.w3.org/2000/svg" width="16"
-                                    height="16" fill="currentColor" viewBox="0 0 16 16">
-                                    <path
-                                      d="M3.646 3.646a.5.5 0 1 1 .708-.708L8 6.293l3.646-3.647a.5.5 0 0 1 .708.708L8.707 7l3.647 3.646a.5.5 0 0 1-.708.708L7.293 7 3.646 3.646z" />
+                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22" fill="currentColor"
+                                    class="size-2.5" width="18" height="18">
+                                    <path fill-rule="evenodd"
+                                      d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-1.72 6.97a.75.75 0 1 0-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 1 0 1.06 1.06L12 13.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L13.06 12l1.72-1.72a.75.75 0 1 0-1.06-1.06L12 10.94l-1.72-1.72Z"
+                                      clip-rule="evenodd" />
                                   </svg>
-                                  Inactive
+                                  Offline
                                 @endif
                               </span>
                             </div>
