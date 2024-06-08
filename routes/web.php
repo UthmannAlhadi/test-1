@@ -34,6 +34,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    Route::get('/profile/image', [ProfileController::class, 'showImageForm'])->name('profile.image');
+    Route::post('/profile/image', [ProfileController::class, 'updateImage'])->name('profile.image.update');
+
     // Print Job
     Route::get('/user/print-upload', [PrintJobController::class, 'displayUpload'])->name('user.print-upload');
     Route::get('/user/print-explain', [PrintJobController::class, 'displayExplain'])->name('user.print-explain');

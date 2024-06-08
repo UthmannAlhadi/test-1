@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\View;
 use App\Models\User;
 use Carbon\Carbon;
 use App\Models\Training;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -64,23 +65,29 @@ class ViewServiceProvider extends ServiceProvider
             $totalOrders = Training::distinct('order_id')->count('order_id');
 
             // Calculate the total daily income
-            $dailyIncome = Training::whereDate('created_at', $today)
-                ->sum('total_price');
+            $dailyIncome = Training::select('order_id', DB::raw('MAX(total_price) as max_total_price'))
+                ->whereDate('created_at', $today)
+                ->groupBy('order_id')
+                ->pluck('max_total_price')
+                ->sum();
 
-            // Calculate the total monthly income
-            $monthlyIncome = Training::whereBetween('created_at', [$startOfMonth, $endOfMonth])
-                ->sum('total_price');
+            // Calculate the total monthly income without redundancy
+            $monthlyIncome = Training::select('order_id', DB::raw('MAX(total_price) as max_total_price'))
+                ->whereBetween('created_at', [$startOfMonth, $endOfMonth])
+                ->groupBy('order_id')
+                ->pluck('max_total_price')
+                ->sum();
 
             // Calculate the average daily sales
-            $averageDailySales = $monthlyIncome / $daysInMonth;
+            $averageDailySales = $daysInMonth > 0 ? number_format($monthlyIncome / $daysInMonth, 2) : 0;
 
             // Define the period for calculating average monthly sales (e.g., past year)
             $startOfPeriod = Carbon::now()->subYear()->startOfMonth();
             $endOfPeriod = Carbon::now()->endOfMonth();
 
-            // Retrieve total sales grouped by month
-            $monthlySales = Training::whereBetween('created_at', [$startOfPeriod, $endOfPeriod])
-                ->selectRaw('SUM(total_price) as total_sales, DATE_FORMAT(created_at, "%Y-%m") as month')
+            // Retrieve total sales grouped by month without redundancy
+            $monthlySales = Training::select(DB::raw('SUM(DISTINCT total_price) as total_sales, DATE_FORMAT(created_at, "%Y-%m") as month'))
+                ->whereBetween('created_at', [$startOfPeriod, $endOfPeriod])
                 ->groupBy('month')
                 ->get();
 
@@ -93,9 +100,17 @@ class ViewServiceProvider extends ServiceProvider
             // Calculate the average monthly sales and format to 2 decimal places
             $averageMonthlySales = $monthsWithSales > 0 ? number_format($totalIncomePeriod / $monthsWithSales, 2) : 0;
 
-            // Calculate the total annual sales
-            $startOfYear = Carbon::now()->subYear()->startOfDay();
-            $annualSales = Training::whereBetween('created_at', [$startOfYear, $today])->sum('total_price');
+            // // Calculate the total annual sales without redundancy
+            // $startOfYear = Carbon::now()->subYear()->startOfDay();
+            // $annualSales = Training::select('order_id', DB::raw('MAX(total_price) as max_total_price'))
+            //     ->whereBetween('created_at', [$startOfYear, $today])
+            //     ->groupBy('order_id')
+            //     ->pluck('max_total_price')
+            //     ->sum();
+            $annualSales = Training::selectRaw('SUM(DISTINCT total_price) as total_income')
+                ->groupBy('order_id')
+                ->pluck('total_income')
+                ->sum();
 
             $view->with([
                 'dailyIncome' => $dailyIncome,
