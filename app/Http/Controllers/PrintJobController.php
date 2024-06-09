@@ -58,6 +58,18 @@ class PrintJobController extends Controller
         return view('user.admin-set-printer');
     }
 
+    public function displayTrackOrder()
+    {
+
+        return view('user.track-order');
+    }
+
+    public function displayAdminTrackOrder()
+    {
+
+        return view('user.admin-track-order');
+    }
+
     public function index()
     {
         //

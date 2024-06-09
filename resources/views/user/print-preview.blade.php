@@ -200,13 +200,13 @@
             <form id="paymentForm" action="{{ route('checkout') }}" method="GET" enctype="multipart/form-data">
               @csrf
               <div class="flex flex-col gap-y-3">
-                <div class="flex">
+                {{-- <div class="flex">
                   <input type="radio" name="payment_method" value="cash"
                     class="shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
                     id="hs-radio-vertical-group-1" required>
                   <label for="hs-radio-vertical-group-1"
                     class="text-sm text-gray-500 ms-2 dark:text-neutral-400">Cash</label>
-                </div>
+                </div> --}}
                 <div class="flex">
                   <input type="radio" name="payment_method" value="stripe"
                     class="shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"

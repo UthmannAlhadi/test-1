@@ -1,7 +1,6 @@
 <x-app-layout>
 
 
-  {{-- <div class="container mx-auto bg-slate-50" style="width: 1200px; height: 590px; overflow: hidden;"> --}}
   <div class="container mx-auto py-4 px-2 h-full" style="width: 1200px; height: 590px; overflow: hidden;">
     <!-- Content Left Side -->
     <div class="sm:col-span-2 h-full overflow-y-auto custom-scrollbar">
@@ -19,7 +18,7 @@
                   <div class="overflow-auto h-full custom-scrollbar">
                     <div class="min-w-full text-left text-sm font-light h-full">
                       <div class="border-b border-gray-400 font-medium dark:border-neutral-900">
-                        <div class="px-6 py-4">Admin Print History</div>
+                        <div class="px-6 py-4">Track Order</div>
                       </div>
                       <div class="py-2">
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -83,5 +82,7 @@
       </div>
     </div>
   </div>
+
+
 
 </x-app-layout>

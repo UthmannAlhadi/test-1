@@ -46,6 +46,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/admin-print-job', [PrintJobController::class, 'displayAdminPrintJob'])->name('user.admin-print-job');
     Route::get('/user/admin-receipt', [PrintJobController::class, 'displayAdminReceipt'])->name('user.admin-receipt');
     Route::get('/user/admin-set-printer', [PrintJobController::class, 'displayAdminSetPrinter'])->name('user.admin-set-printer');
+    Route::get('/user/track-order', [PrintJobController::class, 'displayTrackOrder'])->name('user.track-order');
+    Route::get('/user/admin-track-order', [PrintJobController::class, 'displayAdminTrackOrder'])->name('user.admin-track-order');
 
 
     // Upload File
@@ -71,6 +73,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/delete-order', [StripePaymentController::class, 'deleteOrder'])->name('delete.order');
     Route::post('/upload-receipt', [StripePaymentController::class, 'uploadReceipt'])->name('upload.receipt');
     Route::get('/user/admin-receipt', [StripePaymentController::class, 'index'])->name('user.admin-receipt');
+    Route::get('/track-order', [StripePaymentController::class, 'trackOrder'])->name('user.track-order');
+    Route::get('/admin-track-order', [StripePaymentController::class, 'adminTrackOrder'])->name('user.admin-track-order');
+    Route::post('/update-order-progress', [StripePaymentController::class, 'updateOrderProgress'])->name('update.order.progress');
+
+
 
 
 

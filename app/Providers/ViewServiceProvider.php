@@ -28,6 +28,7 @@ class ViewServiceProvider extends ServiceProvider
         // Using a view composer to share the total user count with the dashboard view
         View::composer('dashboard', function ($view) {
             $totalUsers = User::count();
+            $today = Carbon::today();
 
             // Get the total number of unique orders
             $totalOrders = Training::distinct('order_id')->count('order_id');
@@ -41,6 +42,12 @@ class ViewServiceProvider extends ServiceProvider
             // Get all users
             $users = User::all();
 
+            $dailyIncome = Training::select('order_id', DB::raw('MAX(total_price) as max_total_price'))
+                ->whereDate('created_at', $today)
+                ->groupBy('order_id')
+                ->pluck('max_total_price')
+                ->sum();
+
             $username = User::select('name');
 
             // Pass the total users and orders count to the view
@@ -49,6 +56,7 @@ class ViewServiceProvider extends ServiceProvider
                 'totalOrders' => $totalOrders,
                 'totalIncome' => $totalIncome,
                 'users' => $users,
+                'dailyIncome' => $dailyIncome,
                 'username' => $username
             ]);
         });

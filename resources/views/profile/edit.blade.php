@@ -5,8 +5,8 @@
     </h2>
   </x-slot>
 
-  <div class="">
-    <div class="grid grid-cols-2 gap-2 max-w-full">
+  <div class="mb-2">
+    <div class="grid grid-cols-2 gap-2 max-w-full ">
       <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
         <div class="max-w-xl">
           @include('profile.partials.update-user-image')
@@ -18,17 +18,24 @@
         </div>
       </div>
     </div>
-    <div class="grid grid-cols-2 gap-2">
-      <div class="my-2 p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-        <div class="max-w-xl">
+
+    <div class="grid grid-cols-2 gap-2 max-w-full">
+      <div class="my-2 col-span-1 p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+        <div class="w-full">
           @include('profile.partials.update-password-form')
         </div>
       </div>
-      <div class="my-2 p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-        <div class="">
+      <div class="my-2 col-span-1 p-4 sm:p-8 bg-white shadow sm:rounded-lg self-start">
+        <div class="w-full">
           @include('profile.partials.delete-user-form')
         </div>
       </div>
     </div>
   </div>
+
+
+
+
+
+
 </x-app-layout>

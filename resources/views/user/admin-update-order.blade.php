@@ -1,7 +1,7 @@
 <x-app-layout>
 
 
-  {{-- <div class="container mx-auto bg-slate-50" style="width: 1200px; height: 590px; overflow: hidden;"> --}}
+
   <div class="container mx-auto py-4 px-2 h-full" style="width: 1200px; height: 590px; overflow: hidden;">
     <!-- Content Left Side -->
     <div class="sm:col-span-2 h-full overflow-y-auto custom-scrollbar">
@@ -97,6 +97,7 @@
                                   </div>
                                 </div>
                               </div>
+                              <!-- Update Payment -->
                               <div id="hs-static-backdrop-modal-update-{{ $training->order_id }}"
                                 class="hs-overlay hidden size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto [--overlay-backdrop:static]' data-hs-overlay-keyboard="false">
                                 <div
@@ -145,6 +146,7 @@
                                   </div>
                                 </div>
                               </div>
+                              <!-- Delete Order -->
                               <div id="hs-static-backdrop-modal-delete-{{ $training->order_id }}"
                                 class="hs-overlay hidden size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto [--overlay-backdrop:static]' data-hs-overlay-keyboard="false">
                                 <div
@@ -199,7 +201,6 @@
                               @if ($currentOrderId !== null)
                             </div> <!-- Close the last container -->
                             @endif
-
                           </div>
                         </div>
                       </div>
@@ -209,14 +210,9 @@
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </div>
   </div>
-  </div>
-
-
-
 
 </x-app-layout>

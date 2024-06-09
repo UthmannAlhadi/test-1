@@ -169,7 +169,7 @@ class TrainingController extends Controller
             }
         }
 
-        session()->flash('message', 'Display document');
+        session()->flash('message', 'Display uploaded document');
         return redirect()->route('user.training-list');
 
     }

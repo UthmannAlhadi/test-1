@@ -130,6 +130,22 @@
             Print Job
           </a>
         </li>
+        <!-- Track Order Button -->
+        <li>
+          <a href="{{ route('user.track-order') }}"
+            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg hover:bg-blue-500 dark:hover:bg-gray-900 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600
+                {{ Route::is('user.track-order') ? 'bg-blue-400 text-white' : 'text-slate-700 dark:bg-gray-800' }}">
+            <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg>
+            Track Order
+          </a>
+        </li>
         <!-- Print History Button -->
         <li>
           <a href="{{ route('user.print-history') }}"
@@ -174,6 +190,22 @@
                 <path d="M16 3.13a4 4 0 0 1 0 7.75" />
               </svg>
               Print History
+            </a>
+          </li>
+          <!-- Admin Track Order Button -->
+          <li>
+            <a href="{{ route('user.admin-track-order') }}"
+              class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg hover:bg-blue-500 dark:hover:bg-gray-900 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600
+                {{ Route::is('user.admin-track-order') ? 'bg-blue-400 text-white' : 'text-slate-700 dark:bg-gray-800' }}">
+              <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+              Track Order
             </a>
           </li>
           <!-- Admin Update Order Button -->

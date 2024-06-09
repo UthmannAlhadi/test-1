@@ -10,9 +10,9 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('trainings', function (Blueprint $table) {
             //
-            $table->string('profile_image')->nullable();
+            $table->string('order_progress')->default('pending');  // Add new column
         });
     }
 
@@ -21,9 +21,9 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('trainings', function (Blueprint $table) {
             //
-            $table->dropColumn('profile_image');
+            $table->dropColumn('order_progress');  // Remove the column if rolled back
         });
     }
 };

@@ -298,4 +298,65 @@ class StripePaymentController extends Controller
         return view('admin-receipt', compact('receipts'));
     }
 
+    public function trackOrder()
+    {
+        $userId = auth()->user()->user_id; // Get the authenticated user's ID
+
+        // Retrieve the user's pending orders
+        $orders = DB::table('trainings')
+            ->select('order_id', DB::raw('SUM(total_price) as total_price'))
+            ->where('user_id', $userId) // Filter by the authenticated user's ID
+            ->where('order_progress', 'pending')
+            ->groupBy('order_id')
+            ->get();
+
+        // Retrieve the user's trainings by order
+        $trainingsByOrder = DB::table('trainings')
+            ->where('user_id', $userId) // Filter by the authenticated user's ID
+            ->whereIn('order_id', $orders->pluck('order_id'))
+            ->get()
+            ->groupBy('order_id');
+
+        // Retrieve all trainings for the authenticated user with pending progress
+        $trainings = Training::where('user_id', $userId)->get();
+
+
+        return view('user.track-order', compact('orders', 'trainingsByOrder', 'trainings'));
+    }
+
+    public function adminTrackOrder()
+    {
+        // Retrieve order IDs where there's at least one training with 'pending' or 'in progress' order progress
+        $ordersWithPending = DB::table('trainings')
+            ->select('order_id')
+            ->whereIn('order_progress', ['pending', 'in progress'])
+            ->groupBy('order_id')
+            ->get()
+            ->pluck('order_id')
+            ->toArray();
+
+        // Retrieve all trainings with order IDs that have either pending or in-progress status
+        $trainings = Training::whereIn('order_id', $ordersWithPending)->get();
+
+
+        return view('user.admin-track-order', compact('trainings'));
+    }
+
+    public function updateOrderProgress(Request $request)
+    {
+        $orderId = $request->input('order_id');
+        $orderProgress = $request->input('order_progress');
+        \Log::info('Updating order progress for order ID: ' . $orderId);
+
+        if (!$orderId) {
+            return redirect()->back()->withErrors(['error' => 'Order ID not found.']);
+        }
+
+        // Update the order progress in the database
+        DB::table('trainings')->where('order_id', $orderId)->update(['order_progress' => $orderProgress]);
+
+        return redirect()->back()->with('success', 'Order progress updated successfully.');
+    }
+
+
 }

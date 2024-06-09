@@ -71,7 +71,7 @@
       </button>
       <!-- Dark Mode Button -->
       <button type="button"
-        class="hs-dark-mode hs-dark-mode-active:hidden inline-flex items-center gap-x-2 py-2 px-3 bg-white/10 rounded-full text-sm text-black hover:bg-white/20"
+        class="hs-dark-mode hs-dark-mode-active:hidden inline-flex items-center mx-2 gap-x-2 py-2 px-3 bg-white/10 rounded-full text-sm text-black hover:bg-white/20"
         data-hs-theme-click-value="dark">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -81,7 +81,7 @@
       </button>
       <!-- Light Mode -->
       <button type="button"
-        class="hs-dark-mode hs-dark-mode-active:inline-flex hidden items-center gap-x-2 py-2 px-3  rounded-full text-sm text-white hover:bg-white/20"
+        class="hs-dark-mode hs-dark-mode-active:inline-flex hidden items-center mx-2 gap-x-2 py-2 px-3  rounded-full text-sm text-white hover:bg-white/20"
         data-hs-theme-click-value="light">
         <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
           viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
