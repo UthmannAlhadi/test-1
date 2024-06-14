@@ -94,7 +94,7 @@
       <div class="flex justify-center h-screen">
         <!-- Display left image -->
         <div class="hidden bg-cover lg:block lg:w-2/3"
-          style="background-image: url(https://images.unsplash.com/photo-1504198322253-cfa87a0ff25f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)">
+          style="background-image: url(https://cdn.pixabay.com/photo/2015/05/27/20/50/printing-787192_960_720.jpg)">
         </div>
 
         <div class="flex items-center w-full max-w-md px-6 mx-auto lg:w-2/6">

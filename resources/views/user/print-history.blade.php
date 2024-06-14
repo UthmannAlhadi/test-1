@@ -60,6 +60,7 @@
                                         <li>Status: {{ $training->payment_status }}</li>
                                         <li>Time: {{ \Carbon\Carbon::parse($training->time)->format('d-m-Y H:i') }}</li>
                                         <li>Payment Method: {{ $training->payment_method }}</li>
+                                        <li>Order Progress: {{ ucfirst($training->order_progress) }}</li>
                                       </ul>
                                     </div>
                                   </div>
