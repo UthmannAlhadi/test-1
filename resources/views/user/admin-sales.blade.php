@@ -101,18 +101,143 @@
       </div>
       <!-- End Card Grid -->
 
-      <!-- Charts -->
+      {{-- <!-- Charts -->
       <div class="container mx-auto">
         <div class="bg-white rounded shadow">
           {!! $chart->container() !!}
         </div>
+      </div> --}}
+
+
+      {{-- <!-- Predicted Copies -->
+      <div
+        class="flex flex-col bg-white max-w-max border shadow-sm rounded-xl dark:bg-neutral-800 dark:border-neutral-700 border-blue-400">
+        <div class="p-4 md:p-5">
+          <div class="flex items-center gap-x-2">
+            <p class="text-xs uppercase tracking-wide text-gray-500 dark:text-neutral-500">
+              Predicted Copies Weekly
+            </p>
+          </div>
+
+          <div class="mt-1 flex items-center gap-x-2">
+            <h3 class="text-xl sm:text-2xl font-medium text-gray-800 dark:text-neutral-200">
+              @if (isset($predictions) && count($predictions) > 0)
+                <ul>
+                  @foreach ($predictions as $day => $prediction)
+                    <li>{{ $day }}: {{ $prediction }} copies</li>
+                  @endforeach
+                </ul>
+              @else
+                <p>No predictions available.</p>
+              @endif
+            </h3>
+          </div>
+        </div>
+      </div>
+      <!-- End Card --> --}}
+
+      <div class="grid grid-cols-2 ">
+        <!-- Predicted Copies Chart -->
+        <div
+          class="flex flex-col mx-2 bg-white border shadow-sm rounded-xl dark:bg-neutral-800 dark:border-neutral-700 border-blue-400">
+          <div class="p-4 md:p-5">
+            <div class="flex items-center gap-x-2">
+              <p class="text-xs uppercase tracking-wide text-gray-500 dark:text-neutral-500">
+                Predicted Copies Weekly
+              </p>
+            </div>
+            <canvas id="predictionsChart"></canvas>
+          </div>
+        </div>
+        <!-- End Card -->
+
+        <!-- User Activity Chart -->
+        <div
+          class="flex flex-col mx-2 bg-white border shadow-sm rounded-xl dark:bg-neutral-800 dark:border-neutral-700 border-green-400">
+          <div class="p-4 md:p-5">
+            <div class="flex items-center gap-x-2">
+              <p class="text-xs uppercase tracking-wide text-gray-500 dark:text-neutral-500">
+                User Activity by Hour
+              </p>
+            </div>
+            <canvas id="userActivityChart"></canvas>
+          </div>
+        </div>
+        <!-- End Card -->
       </div>
 
-    </div>
-  </div>
-  <script src="{{ $chart->cdn() }}"></script>
 
-  {{ $chart->script() }}
+
+
+    </div>
+
+  </div>
+  {{-- <script src="{{ $chart->cdn() }}"></script>
+
+  {{ $chart->script() }} --}}
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@^2.0/dist/tailwind.min.css"> --}}
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Predicted Copies Chart
+      var ctxPredictions = document.getElementById('predictionsChart').getContext('2d');
+      var predictions = @json($predictions);
+
+      var predictionLabels = Object.keys(predictions);
+      var predictionData = Object.values(predictions);
+
+      var predictionsChart = new Chart(ctxPredictions, {
+        type: 'bar',
+        data: {
+          labels: predictionLabels,
+          datasets: [{
+            label: 'Predicted Copies',
+            data: predictionData,
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+
+      // User Activity Chart
+      var ctxActivity = document.getElementById('userActivityChart').getContext('2d');
+      var activities = @json($activities);
+
+      var activityLabels = activities.map(item => item.hour);
+      var activityData = activities.map(item => item.count);
+
+      var userActivityChart = new Chart(ctxActivity, {
+        type: 'line',
+        data: {
+          labels: activityLabels,
+          datasets: [{
+            label: 'User Activity by Hour',
+            data: activityData,
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    });
+  </script>
 
 
 </x-app-layout>

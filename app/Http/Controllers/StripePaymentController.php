@@ -302,11 +302,11 @@ class StripePaymentController extends Controller
     {
         $userId = auth()->user()->user_id; // Get the authenticated user's ID
 
-        // Retrieve the user's pending orders
+        // Retrieve the user's pending or in progress orders
         $orders = DB::table('trainings')
             ->select('order_id', DB::raw('SUM(total_price) as total_price'))
             ->where('user_id', $userId) // Filter by the authenticated user's ID
-            ->where('order_progress', 'pending')
+            ->whereIn('order_progress', ['pending', 'in progress']) // Include both pending and in progress
             ->groupBy('order_id')
             ->get();
 
@@ -317,12 +317,14 @@ class StripePaymentController extends Controller
             ->get()
             ->groupBy('order_id');
 
-        // Retrieve all trainings for the authenticated user with pending progress
-        $trainings = Training::where('user_id', $userId)->get();
-
+        // Retrieve all trainings for the authenticated user with pending or in progress status
+        $trainings = Training::where('user_id', $userId)
+            ->whereIn('order_progress', ['pending', 'in progress']) // Include both pending and in progress
+            ->get();
 
         return view('user.track-order', compact('orders', 'trainingsByOrder', 'trainings'));
     }
+
 
     public function adminTrackOrder()
     {
@@ -357,6 +359,5 @@ class StripePaymentController extends Controller
 
         return redirect()->back()->with('success', 'Order progress updated successfully.');
     }
-
 
 }

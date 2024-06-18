@@ -84,10 +84,14 @@ Route::middleware('auth')->group(function () {
 
     // Dashboard Admin
 
+    // Route::get('/user/admin-sales', [UserController::class, 'predictPython'])->name('user.admin-sales');
+
 
     // Admin Sales
-    Route::get('/user/admin-sales', [SalesController::class, 'displaySales'])->name('user.admin-sales');
     Route::get('/user/admin-sales', [UserController::class, 'index'])->name('user.admin-sales');
+    Route::get('/user/admin-sales', [UserController::class, 'getPredictions'])->name('user.admin-sales');
+
+
 
 
     // Admin Set Printer

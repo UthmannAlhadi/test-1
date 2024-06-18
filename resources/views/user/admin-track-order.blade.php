@@ -80,17 +80,17 @@
                                     </div>
                                   @endif
                                   <div class="mt-2">
-                                    <img src="{{ asset('images/trainings/' . $training->photo) }}" alt="Training Image"
-                                      class="w-40 h-40 rounded-md mb-4">
+                                    {{-- <img src="{{ asset('images/trainings/' . $training->photo) }}" alt="Training Image"
+                                      class="w-40 h-40 rounded-md mb-4"> --}}
                                     <h4 class="text-md font-normal text-gray-800 dark:text-black"></h4>
                                     <ul class="text-white py-2">
-                                      <li>Color:
+                                      {{-- <li>Color:
                                         {{ $training->printing_color_option == '1' ? 'Black & White' : 'Color' }}</li>
                                       <li>Layout: {{ ucfirst($training->layout_option) }}</li>
                                       <li>Copies: {{ $training->copies }}</li>
-                                      <li>Total Price: RM{{ number_format($training->total_price, 2) }}</li>
-                                      <li>Status: {{ $training->payment_status }}</li>
+                                      <li>Total Price: RM{{ number_format($training->total_price, 2) }}</li> --}}
                                       <li>Time: {{ \Carbon\Carbon::parse($training->time)->format('d-m-Y H:i') }}</li>
+                                      <li>Status: {{ $training->payment_status }}</li>
                                       <li>Payment Method: {{ $training->payment_method }}</li>
                                       <li>Order Progress: {{ ucfirst($training->order_progress) }}</li>
                                     </ul>
