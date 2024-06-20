@@ -1,71 +1,69 @@
 <x-app-layout>
 
-  <!-- Chevrons Breadcrumbs -->
-  <ol class="flex items-center whitespace-nowrap" aria-label="Breadcrumb">
-    <li class="inline-flex items-center">
-      <a class="flex items-center text-sm text-gray-300 hover:text-blue-600 focus:outline-none focus:text-blue-600 dark:focus:text-blue-500"
-        href="{{ route('dashboard') }}">
-        Dashboard
-      </a>
-      <svg class="flex-shrink-0 mx-2 overflow-visible size-4 text-gray-400 dark:text-neutral-600"
-        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="m9 18 6-6-6-6" />
-      </svg>
-    </li>
-    <li class="inline-flex items-center">
-      <a class="flex items-center text-sm text-gray-300 hover:text-blue-600 focus:outline-none focus:text-blue-600 dark:focus:text-blue-500"
-        href="{{ route('user.print-explain') }}">
-        Print Explain
+  <div class="flex flex-col w-full mt-8">
+    <!-- Chevrons Breadcrumbs -->
+    <ol class="flex justify-center whitespace-nowrap mb-2 w-1/2 px-8" aria-label="Breadcrumb">
+      <li class="inline-flex items-center">
+        <a
+          class="flex items-center text-sm text-gray-300 hover:text-purple-600 focus:outline-none focus:text-purple-600 dark:focus:text-purple-500">
+          Dashboard
+        </a>
         <svg class="flex-shrink-0 mx-2 overflow-visible size-4 text-gray-400 dark:text-neutral-600"
           xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="m9 18 6-6-6-6" />
         </svg>
-      </a>
-    </li>
-    <li class="inline-flex items-center">
-      <a class="flex items-center text-sm text-gray-300 hover:text-blue-600 focus:outline-none focus:text-blue-600 dark:focus:text-blue-500"
-        href="{{ route('user.training-form') }}">
-        Create Print Job
-        <svg class="flex-shrink-0 mx-2 overflow-visible size-4 text-gray-400 dark:text-neutral-600"
-          xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="m9 18 6-6-6-6" />
-        </svg>
-      </a>
-    </li>
-    <li class="inline-flex items-center">
-      <a class="flex items-center text-sm text-gray-300 hover:text-blue-600 focus:outline-none focus:text-blue-600 dark:focus:text-blue-500"
-        href="{{ route('user.training-list') }}">
-        Set Print Preference
-        <svg class="flex-shrink-0 mx-2 overflow-visible size-4 text-gray-400 dark:text-neutral-600"
-          xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="m9 18 6-6-6-6" />
-        </svg>
-      </a>
-    </li>
-    <li class="inline-flex items-center">
-      <a class="flex items-center text-sm text-gray-900 hover:text-blue-600 focus:outline-none focus:text-blue-600 dark:focus:text-blue-500"
-        href="{{ route('user.print-preview') }}">
-        Preview
-        <svg class="flex-shrink-0 mx-2 overflow-visible size-4 text-gray-400 dark:text-neutral-600"
-          xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="m9 18 6-6-6-6" />
-        </svg>
-      </a>
-    </li>
-  </ol>
+      </li>
+      <li class="inline-flex items-center">
+        <a
+          class="flex items-center text-sm text-gray-300 hover:text-purple-600 focus:outline-none focus:text-purple-600 dark:focus:text-purple-500">
+          Print Explain
+          <svg class="flex-shrink-0 mx-2 overflow-visible size-4 text-gray-400 dark:text-neutral-600"
+            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m9 18 6-6-6-6" />
+          </svg>
+        </a>
+      </li>
+      <li class="inline-flex items-center">
+        <a
+          class="flex items-center text-sm text-gray-300 hover:text-purple-600 focus:outline-none focus:text-purple-600 dark:focus:text-purple-500">
+          Create Print Job
+          <svg class="flex-shrink-0 mx-2 overflow-visible size-4 text-gray-400 dark:text-neutral-600"
+            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m9 18 6-6-6-6" />
+          </svg>
+        </a>
+      </li>
+      <li class="inline-flex items-center">
+        <a
+          class="flex items-center text-sm text-gray-300 hover:text-purple-600 focus:outline-none focus:text-purple-600 dark:focus:text-purple-500">
+          Set Print Preference
+          <svg class="flex-shrink-0 mx-2 overflow-visible size-4 text-gray-400 dark:text-neutral-600"
+            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m9 18 6-6-6-6" />
+          </svg>
+        </a>
+      </li>
+      <li class="inline-flex items-center">
+        <a
+          class="flex items-center text-sm text-gray-900 hover:text-purple-600 focus:outline-none focus:text-purple-600 dark:focus:text-purple-500">
+          Preview
+        </a>
+      </li>
+    </ol>
+  </div>
 
 
-  <div class="container mx-auto" style="width: 1200px; height: 600px; overflow: hidden;">
+
+  <div class="container mx-auto drop-shadow-lg" style="width: 1200px; height: 600px; overflow: hidden;">
     <div class="py-4 px-2 grid grid-cols-1 sm:grid-cols-3 gap-4 h-full">
       <!-- Left Side - Display Document -->
       <div class="sm:col-span-2 h-full overflow-y-auto custom-scrollbar rounded-2xl">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg h-full">
-          <div class="bg-white border rounded shadow p-4 h-full">
+          <div class="bg-white rounded shadow p-4 h-full">
             <div class="p-2 h-full">
               @if (Session::has('message'))
                 <div class="bg-green-500 text-white px-4 py-2 rounded">
@@ -89,7 +87,7 @@
                             <!-- Display training details and preferences -->
                             @foreach ($trainings as $training)
                               <tr
-                                class="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600">
+                                class="border-b flex justify-center transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600">
                                 <td class="whitespace-nowrap px-6 py-4">
                                   <img src="{{ asset('images/trainings/' . $training->photo) }}" alt=""
                                     class="training-image {{ $preferences['printing_color_option'] == '1' ? 'grayscale' : '' }} {{ $preferences['layout_option'] }}"
@@ -111,7 +109,7 @@
       <!-- Right Side - Display Preferred Settings -->
       <div class="h-full">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg ">
-          <div class="bg-white border shadow p-5 rounded-2xl">
+          <div class="bg-white shadow p-5 rounded-2xl">
             <div class="p-2 h-full">
               <h2 class="text-lg font-semibold">Preferred Settings</h2>
               <ul>

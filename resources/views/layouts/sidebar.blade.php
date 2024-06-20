@@ -1,44 +1,7 @@
-<!-- Sidebar Toggle -->
-<div
-  class="sticky top-0 inset-x-0 z-20 bg-white border-y px-4 sm:px-6 md:px-8 lg:hidden dark:bg-gray-800 dark:border-gray-700">
-  <div class="flex items-center py-4">
-    <!-- Navigation Toggle -->
-    <button type="button" class="text-gray-500 hover:text-gray-600" data-hs-overlay="#application-sidebar"
-      aria-controls="application-sidebar" aria-label="Toggle navigation">
-      <span class="sr-only">Toggle Navigation</span>
-      <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-        stroke-linejoin="round">
-        <line x1="3" x2="21" y1="6" y2="6" />
-        <line x1="3" x2="21" y1="12" y2="12" />
-        <line x1="3" x2="21" y1="18" y2="18" />
-      </svg>
-    </button>
-    <!-- End Navigation Toggle -->
-
-    <!-- Breadcrumb -->
-    <a class="ms-3 flex items-center whitespace-nowrap" aria-label="Breadcrumb" href="{{ route('dashboard') }}">
-      <li class="flex items-center text-sm text-gray-800 dark:text-gray-400">
-        Application Layout
-        <svg class="flex-shrink-0 mx-3 overflow-visible size-2.5 text-gray-400 dark:text-gray-600" width="16"
-          height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M5 1L10.6869 7.16086C10.8637 7.35239 10.8637 7.64761 10.6869 7.83914L5 14" stroke="currentColor"
-            stroke-width="2" stroke-linecap="round" />
-        </svg>
-      </li>
-      <li class="text-sm font-semibold text-gray-800 truncate dark:text-gray-400" aria-current="page">
-        Dashboard
-      </li>
-      </ol>
-      <!-- End Breadcrumb -->
-  </div>
-</div>
-<!-- End Sidebar Toggle -->
-
 <!-- Sidebar -->
 <div id="application-sidebar"
-  class="hs-overlay hs-overlay-open:translate-x-0 -translate-x-full transition-all duration-300 transform hidden fixed top-0 start-0 bottom-0 z-[60] w-52 bg-white border-e border-gray-300 pt-7 pb-10 overflow-y-auto lg:block lg:translate-x-0 lg:end-auto lg:bottom-0 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-slate-700 dark:[&::-webkit-scrollbar-thumb]:bg-slate-500 dark:bg-gray-800 dark:border-gray-700">
-  <div class="flex align-middle mx-4">
+  class="hs-overlay hs-overlay-open:translate-x-0 -translate-x-full transition-all duration-300 transform ml-6 my-6 hidden fixed top-0 start-0 bottom-0 z-[60] w-64 bg-white rounded-3xl drop-shadow-xl  pt-7 pb-10 overflow-y-auto lg:block lg:translate-x-0 lg:end-auto lg:bottom-0 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-slate-700 dark:[&::-webkit-scrollbar-thumb]:bg-slate-500 dark:bg-gray-800 dark:border-gray-700">
+  <div class="flex justify-center align-middle mx-4">
     <svg version="1.1" id="Layer_1" class="w-auto h-3 sm:h-5" xmlns="http://www.w3.org/2000/svg" x="0" y="0"
       viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve">
       <style>
@@ -93,17 +56,17 @@
       <path class="st16"
         d="M256.168 296.561h-86.756a7.5 7.5 0 0 1-7.501-7.501 7.5 7.5 0 0 1 7.501-7.501h86.756a7.5 7.5 0 0 1 7.501 7.501 7.5 7.5 0 0 1-7.501 7.501zM341.168 296.561h-56.756a7.5 7.5 0 0 1-7.501-7.501 7.5 7.5 0 0 1 7.501-7.501h56.756a7.5 7.5 0 0 1 7.501 7.501 7.5 7.5 0 0 1-7.501 7.501zM316.168 340.095H169.412a7.5 7.5 0 0 1-7.501-7.501 7.5 7.5 0 0 1 7.501-7.501h146.756a7.5 7.5 0 0 1 7.501 7.501 7.5 7.5 0 0 1-7.501 7.501zM346.168 388.095H169.412a7.5 7.5 0 0 1-7.501-7.501 7.5 7.5 0 0 1 7.501-7.501h176.756a7.5 7.5 0 0 1 7.501 7.501 7.5 7.5 0 0 1-7.501 7.501z" />
     </svg>
-    <a class="flex-none text-lg font-semibold mx-2 dark:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-      href="#" aria-label="Brand">Ziegers Printing</a>
+    <a class="flex-none font-mono text-lg font-semibold mx-2 dark:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+      href="dashboard" aria-label="Brand">Ziegers Printing</a>
   </div>
 
   <nav class="hs-accordion-group p-6 w-full flex flex-col flex-wrap" data-hs-accordion-always-open>
-    <ul class="space-y-1.5">
+    <ul class="space-y-3.5">
       <!-- Dashboard Button -->
       <li>
         <a href="{{ route('dashboard') }}"
-          class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg hover:bg-blue-500 dark:hover:bg-gray-900 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600
-                {{ Route::is('dashboard') ? 'bg-blue-400 text-white' : 'text-slate-700 dark:bg-gray-800' }}">
+          class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg hover:bg-purple-500 dark:hover:bg-gray-900 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600
+                {{ Route::is('dashboard') ? 'bg-purple-500 text-white' : 'text-slate-700 dark:bg-gray-800' }}">
           <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
             stroke-linejoin="round">
@@ -117,8 +80,8 @@
         <!-- Print Job Button -->
         <li>
           <a href="{{ route('user.training-form') }}"
-            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg hover:bg-blue-500 dark:hover:bg-gray-900 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600
-                {{ Route::is('user.training-form') ? 'bg-blue-400 text-white' : 'text-slate-700 dark:bg-gray-800' }}">
+            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg hover:bg-purple-500 dark:hover:bg-gray-900 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600
+                {{ Route::is('user.training-form') ? 'bg-purple-500 text-white' : 'text-slate-700 dark:bg-gray-800' }}">
             <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
               viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
               stroke-linejoin="round">
@@ -133,8 +96,8 @@
         <!-- Track Order Button -->
         <li>
           <a href="{{ route('user.track-order') }}"
-            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg hover:bg-blue-500 dark:hover:bg-gray-900 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600
-                {{ Route::is('user.track-order') ? 'bg-blue-400 text-white' : 'text-slate-700 dark:bg-gray-800' }}">
+            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg hover:bg-purple-500 dark:hover:bg-gray-900 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600
+                {{ Route::is('user.track-order') ? 'bg-purple-500 text-white' : 'text-slate-700 dark:bg-gray-800' }}">
             <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
               viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
               stroke-linejoin="round">
@@ -149,8 +112,8 @@
         <!-- Print History Button -->
         <li>
           <a href="{{ route('user.print-history') }}"
-            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg hover:bg-blue-500 dark:hover:bg-gray-900 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600
-                {{ Route::is('user.print-history') ? 'bg-blue-400 text-white' : 'text-slate-700 dark:bg-gray-800' }}">
+            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg hover:bg-purple-500 dark:hover:bg-gray-900 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600
+                {{ Route::is('user.print-history') ? 'bg-purple-500 text-white' : 'text-slate-700 dark:bg-gray-800' }}">
             <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
               viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
               stroke-linejoin="round">
@@ -163,8 +126,8 @@
         <!-- Profile Button -->
         <li>
           <a href="{{ route('profile.edit') }}"
-            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg hover:bg-blue-500 dark:hover:bg-gray-900 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600
-                {{ Route::is('profile.edit') ? 'bg-blue-400 text-white' : 'text-slate-700 dark:bg-gray-800' }}">
+            class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg hover:bg-purple-500 dark:hover:bg-gray-900 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600
+                {{ Route::is('profile.edit') ? 'bg-purple-500 text-white' : 'text-slate-700 dark:bg-gray-800' }}">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
               class="flex-shrink-0 size-5">
               <path fill-rule="evenodd"
@@ -179,8 +142,8 @@
           <!-- Admin Print History Button -->
           <li>
             <a href="{{ route('user.admin-print-history') }}"
-              class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg hover:bg-blue-500 dark:hover:bg-gray-900 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600
-                {{ Route::is('user.admin-print-history') ? 'bg-blue-400 text-white' : 'text-slate-700 dark:bg-gray-800' }}">
+              class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg hover:bg-purple-500 dark:hover:bg-gray-900 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600
+                {{ Route::is('user.admin-print-history') ? 'bg-purple-500 text-white' : 'text-slate-700 dark:bg-gray-800' }}">
               <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                 stroke-linejoin="round">
@@ -195,8 +158,8 @@
           <!-- Admin Track Order Button -->
           <li>
             <a href="{{ route('user.admin-track-order') }}"
-              class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg hover:bg-blue-500 dark:hover:bg-gray-900 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600
-                {{ Route::is('user.admin-track-order') ? 'bg-blue-400 text-white' : 'text-slate-700 dark:bg-gray-800' }}">
+              class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg hover:bg-purple-500 dark:hover:bg-gray-900 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600
+                {{ Route::is('user.admin-track-order') ? 'bg-purple-500 text-white' : 'text-slate-700 dark:bg-gray-800' }}">
               <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                 stroke-linejoin="round">
@@ -211,8 +174,8 @@
           <!-- Admin Update Order Button -->
           <li>
             <a href="{{ route('user.admin-update-order') }}"
-              class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg hover:bg-blue-500 dark:hover:bg-gray-900 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600
-                {{ Route::is('user.admin-update-order') ? 'bg-blue-400 text-white' : 'text-slate-700 dark:bg-gray-800' }}">
+              class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg hover:bg-purple-500 dark:hover:bg-gray-900 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600
+                {{ Route::is('user.admin-update-order') ? 'bg-purple-500 text-white' : 'text-slate-700 dark:bg-gray-800' }}">
               <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                 stroke-linejoin="round">
@@ -227,8 +190,8 @@
           <!-- Admin Sales Button -->
           <li>
             <a href="{{ route('user.admin-sales') }}"
-              class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg hover:bg-blue-500 dark:hover:bg-gray-900 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600
-                {{ Route::is('user.admin-sales') ? 'bg-blue-400 text-white' : 'text-slate-700 dark:bg-gray-800' }}">
+              class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg hover:bg-purple-500 dark:hover:bg-gray-900 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600
+                {{ Route::is('user.admin-sales') ? 'bg-purple-500 text-white' : 'text-slate-700 dark:bg-gray-800' }}">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="flex-shrink-0 size-5">
                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -240,8 +203,8 @@
           <!-- Admin Receipt Button -->
           <li>
             <a href="{{ route('user.admin-receipt') }}"
-              class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg hover:bg-blue-500 dark:hover:bg-gray-900 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600
-                {{ Route::is('user.admin-receipt') ? 'bg-blue-400 text-white' : 'text-slate-700 dark:bg-gray-800' }}">
+              class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg hover:bg-purple-500 dark:hover:bg-gray-900 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600
+                {{ Route::is('user.admin-receipt') ? 'bg-purple-500 text-white' : 'text-slate-700 dark:bg-gray-800' }}">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                 stroke-linejoin="round" class="flex-shrink-0 size-5">
@@ -256,8 +219,8 @@
           <!-- Admin Set Printer Button -->
           <li>
             <a href="{{ route('user.admin-set-printer') }}"
-              class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg hover:bg-blue-500 dark:hover:bg-gray-900 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600
-                {{ Route::is('user.admin-set-printer') ? 'bg-blue-400 text-white' : 'text-slate-700 dark:bg-gray-800' }}">
+              class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg hover:bg-purple-500 dark:hover:bg-gray-900 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600
+                {{ Route::is('user.admin-set-printer') ? 'bg-purple-500 text-white' : 'text-slate-700 dark:bg-gray-800' }}">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="flex-shrink-0 size-5">
                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -269,8 +232,8 @@
           <!-- Profile Button -->
           <li>
             <a href="{{ route('profile.edit') }}"
-              class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg hover:bg-blue-500 dark:hover:bg-gray-900 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600
-                {{ Route::is('profile.edit') ? 'bg-blue-400 text-white' : 'text-slate-700 dark:bg-gray-800' }}">
+              class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg hover:bg-purple-500 dark:hover:bg-gray-900 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600
+                {{ Route::is('profile.edit') ? 'bg-purple-500 text-white' : 'text-slate-700 dark:bg-gray-800' }}">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                 class="flex-shrink-0 size-5">
                 <path fill-rule="evenodd"

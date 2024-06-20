@@ -13,6 +13,9 @@ export default {
 
     theme: {
         extend: {
+            colors: {
+                'purple-vue': '#A855F7',
+            },
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },

@@ -1,34 +1,15 @@
 <x-app-layout>
   <div class="w-full">
-    <div class="p-4 sm:p-6 space-y-4 sm:space-y-6 ">
+    <div class="p-4 sm:p-6 space-y-2 sm:space-y-6 ">
 
       <!-- Toggle monthy / annual -->
       <div class="flex justify-between mb-3">
         <h2 class="text-xl font-bold md:text-4xl md:leading-tight dark:text-white">Sales Dashboard</h2>
-        {{-- <div id="toggle-count" class="p-0.5 inline-block bg-gray-100 rounded-lg dark:bg-neutral-700">
-          <label for="toggle-count-daily" class="relative inline-block py-2 px-3">
-            <span
-              class="inline-block relative z-10 text-sm font-medium text-gray-800 cursor-pointer dark:text-neutral-200">
-              Daily
-            </span>
-            <input id="toggle-count-daily" name="toggle-count" type="radio"
-              class="absolute top-0 end-0 size-full border-transparent bg-transparent bg-none text-transparent rounded-lg cursor-pointer before:absolute before:inset-0 before:size-full before:rounded-lg focus:ring-offset-0 checked:before:bg-white checked:before:shadow-sm checked:bg-none focus:ring-transparent dark:checked:before:bg-neutral-800 dark:focus:ring-offset-transparent "
-              checked="">
-          </label>
-          <label for="toggle-count-monthly" class="relative inline-block py-2 px-3">
-            <span
-              class="inline-block relative z-10 text-sm font-medium text-gray-800 cursor-pointer dark:text-neutral-200">
-              Monthly
-            </span>
-            <input id="toggle-count-monthly" name="toggle-count" type="radio"
-              class="absolute top-0 end-0 size-full border-transparent bg-transparent bg-none text-transparent rounded-lg cursor-pointer before:absolute before:inset-0 before:size-full before:rounded-lg focus:ring-offset-0 checked:before:bg-white checked:before:shadow-sm checked:bg-none focus:ring-transparent dark:checked:before:bg-neutral-800 dark:focus:ring-offset-transparent">
-          </label>
-        </div> --}}
       </div>
       <!-- End Toggle -->
 
       <!-- Card Grid -->
-      <div class="grid grid-cols-4 lg:items-center bg-white border border-gray-200 rounded-xl dark:border-neutral-700">
+      <div class="grid grid-cols-4 lg:items-center bg-white drop-shadow-lg rounded-xl dark:border-neutral-700">
         <!-- Number of sales -->
         <div class="flex flex-col p-4">
           <div class="flex justify-start items-center mb-1">
@@ -58,8 +39,6 @@
           </div>
         </div>
         <!-- End Card -->
-
-
 
         <!-- Average Sales daily -->
         <div class="flex flex-col p-4">
@@ -101,45 +80,11 @@
       </div>
       <!-- End Card Grid -->
 
-      {{-- <!-- Charts -->
-      <div class="container mx-auto">
-        <div class="bg-white rounded shadow">
-          {!! $chart->container() !!}
-        </div>
-      </div> --}}
-
-
-      {{-- <!-- Predicted Copies -->
-      <div
-        class="flex flex-col bg-white max-w-max border shadow-sm rounded-xl dark:bg-neutral-800 dark:border-neutral-700 border-blue-400">
-        <div class="p-4 md:p-5">
-          <div class="flex items-center gap-x-2">
-            <p class="text-xs uppercase tracking-wide text-gray-500 dark:text-neutral-500">
-              Predicted Copies Weekly
-            </p>
-          </div>
-
-          <div class="mt-1 flex items-center gap-x-2">
-            <h3 class="text-xl sm:text-2xl font-medium text-gray-800 dark:text-neutral-200">
-              @if (isset($predictions) && count($predictions) > 0)
-                <ul>
-                  @foreach ($predictions as $day => $prediction)
-                    <li>{{ $day }}: {{ $prediction }} copies</li>
-                  @endforeach
-                </ul>
-              @else
-                <p>No predictions available.</p>
-              @endif
-            </h3>
-          </div>
-        </div>
-      </div>
-      <!-- End Card --> --}}
 
       <div class="grid grid-cols-2 ">
         <!-- Predicted Copies Chart -->
         <div
-          class="flex flex-col mx-2 bg-white border shadow-sm rounded-xl dark:bg-neutral-800 dark:border-neutral-700 border-blue-400">
+          class="flex flex-col mx-2 bg-white drop-shadow-lg shadow-sm rounded-xl dark:bg-neutral-800 dark:border-neutral-700">
           <div class="p-4 md:p-5">
             <div class="flex items-center gap-x-2">
               <p class="text-xs uppercase tracking-wide text-gray-500 dark:text-neutral-500">
@@ -153,7 +98,7 @@
 
         <!-- User Activity Chart -->
         <div
-          class="flex flex-col mx-2 bg-white border shadow-sm rounded-xl dark:bg-neutral-800 dark:border-neutral-700 border-green-400">
+          class="flex flex-col mx-2 bg-white drop-shadow-lg shadow-sm rounded-xl dark:bg-neutral-800 dark:border-neutral-700">
           <div class="p-4 md:p-5">
             <div class="flex items-center gap-x-2">
               <p class="text-xs uppercase tracking-wide text-gray-500 dark:text-neutral-500">
@@ -195,8 +140,8 @@
           datasets: [{
             label: 'Predicted Copies',
             data: predictionData,
-            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-            borderColor: 'rgba(54, 162, 235, 1)',
+            backgroundColor: 'rgba(214, 188, 239)',
+            borderColor: 'rgba(129, 41, 212)',
             borderWidth: 1
           }]
         },

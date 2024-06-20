@@ -1,77 +1,70 @@
 <x-app-layout>
 
-
   <!-- Chevrons Breadcrumbs -->
-  <ol class="flex items-center whitespace-nowrap" aria-label="Breadcrumb">
-    <li class="inline-flex items-center">
-      <a class="flex items-center text-sm text-gray-300 hover:text-blue-600 focus:outline-none focus:text-blue-600 dark:focus:text-blue-500"
-        href="{{ route('dashboard') }}">
-        Dashboard
-      </a>
-      <svg class="flex-shrink-0 mx-2 overflow-visible size-4 text-gray-400 dark:text-neutral-600"
-        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="m9 18 6-6-6-6" />
-      </svg>
-    </li>
-    <li class="inline-flex items-center">
-      <a class="flex items-center text-sm text-gray-300 hover:text-blue-600 focus:outline-none focus:text-blue-600 dark:focus:text-blue-500"
-        href="{{ route('user.print-explain') }}">
-        Print Explain
+  <div class="flex flex-col w-full mt-8">
+    <ol class="flex justify-center whitespace-nowrap mb-2 w-1/2 px-8" aria-label="Breadcrumb">
+      <li class="inline-flex items-center">
+        <a
+          class="flex items-center text-sm text-gray-300 hover:text-purple-600 focus:outline-none focus:text-purple-600 dark:focus:text-purple-500">
+          Dashboard
+        </a>
         <svg class="flex-shrink-0 mx-2 overflow-visible size-4 text-gray-400 dark:text-neutral-600"
           xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="m9 18 6-6-6-6" />
         </svg>
-      </a>
-    </li>
-    <li class="inline-flex items-center">
-      <a class="flex items-center text-sm text-gray-300 hover:text-blue-600 focus:outline-none focus:text-blue-600 dark:focus:text-blue-500"
-        href="{{ route('user.training-form') }}">
-        Create Print Job
-        <svg class="flex-shrink-0 mx-2 overflow-visible size-4 text-gray-400 dark:text-neutral-600"
-          xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="m9 18 6-6-6-6" />
-        </svg>
-      </a>
-    </li>
-    <li class="inline-flex items-center">
-      <a class="flex items-center text-sm text-gray-900 hover:text-blue-600 focus:outline-none focus:text-blue-600 dark:focus:text-blue-500"
-        href="{{ route('user.training-list') }}">
-        Set Print Preference
-        <svg class="flex-shrink-0 mx-2 overflow-visible size-4 text-gray-400 dark:text-neutral-600"
-          xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="m9 18 6-6-6-6" />
-        </svg>
-      </a>
-    </li>
-    <li class="inline-flex items-center">
-      <a class="flex items-center text-sm text-gray-300 hover:text-blue-600 focus:outline-none focus:text-blue-600 dark:focus:text-blue-500"
-        href="{{ route('user.print-preview') }}">
-        Preview
-        <svg class="flex-shrink-0 mx-2 overflow-visible size-4 text-gray-400 dark:text-neutral-600"
-          xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="m9 18 6-6-6-6" />
-        </svg>
-      </a>
-    </li>
-    {{-- <li class="inline-flex items-center text-sm font-semibold text-gray-800 truncate dark:text-gray-200"
-        aria-current="page">
-        Create Print Job
-      </li> --}}
-  </ol>
-  <!-- Chevrons Breadcrumbs End -->
+      </li>
+      <li class="inline-flex items-center">
+        <a
+          class="flex items-center text-sm text-gray-300 hover:text-purple-600 focus:outline-none focus:text-purple-600 dark:focus:text-purple-500">
+          Print Explain
+          <svg class="flex-shrink-0 mx-2 overflow-visible size-4 text-gray-400 dark:text-neutral-600"
+            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m9 18 6-6-6-6" />
+          </svg>
+        </a>
+      </li>
+      <li class="inline-flex items-center">
+        <a
+          class="flex items-center text-sm text-gray-300 hover:text-purple-600 focus:outline-none focus:text-purple-600 dark:focus:text-purple-500">
+          Create Print Job
+          <svg class="flex-shrink-0 mx-2 overflow-visible size-4 text-gray-400 dark:text-neutral-600"
+            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m9 18 6-6-6-6" />
+          </svg>
+        </a>
+      </li>
+      <li class="inline-flex items-center">
+        <a
+          class="flex items-center text-sm text-gray-900 hover:text-purple-600 focus:outline-none focus:text-purple-600 dark:focus:text-purple-500">
+          Set Print Preference
+          <svg class="flex-shrink-0 mx-2 overflow-visible size-4 text-gray-400 dark:text-neutral-600"
+            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m9 18 6-6-6-6" />
+          </svg>
+        </a>
+      </li>
+      <li class="inline-flex items-center">
+        <a
+          class="flex items-center text-sm text-gray-300 hover:text-purple-600 focus:outline-none focus:text-purple-600 dark:focus:text-purple-500">
+          Preview
+        </a>
+      </li>
+    </ol>
+    <!-- Chevrons Breadcrumbs End -->
+  </div>
+
 
   <!-- Display File -->
-  <div class="container mx-auto py-4 px-2 grid grid-cols-1 sm:grid-cols-3 gap-4 h-full"
+  <div class="container mx-auto py-4 px-2 grid grid-cols-1 sm:grid-cols-3 gap-4 h-full drop-shadow-lg"
     style="width: 1200px; height: 600px; overflow: hidden;">
     <!-- Content Left Side -->
     <div class="sm:col-span-2 h-full overflow-y-auto custom-scrollbar">
       <div class="bg-white overflow-hidden shadow-sm sm:rounded-2xl h-full">
-        <div class="bg-white border rounded shadow p-4 h-full">
+        <div class="bg-gray-50 rounded shadow p-4 h-full">
           <div class="p-2 h-full">
             @if (Session::has('message'))
               <div class="bg-green-500 text-white px-4 py-2 rounded">
@@ -95,7 +88,7 @@
                           @foreach ($trainings as $training)
                             <!-- Display training details -->
                             <tr
-                              class="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600">
+                              class="flex border-b transition duration-300 ease-in-out justify-center hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600">
                               <td class="whitespace-nowrap px-6 py-4">
                                 <img src="{{ asset('images/trainings/' . $training->photo) }}" alt=""
                                   class="training-image"
@@ -117,7 +110,7 @@
     <!-- Content Right Side -->
     <div class="h-full">
       <div class="bg-white overflow-hidden shadow-sm sm:rounded-2xl">
-        <div class="bg-white border rounded shadow p-5">
+        <div class="bg-white rounded shadow p-5">
           <div class="p-2 h-full">
             @if (Session::has('message'))
               <div class="bg-green-500 text-white px-4 py-2 rounded">
@@ -143,8 +136,8 @@
                               <div class="grid w-full place-items-center">
                                 <div class="grid w-52 grid-cols-2 gap-2 rounded-xl bg-gray-50 p-2">
                                   <div>
-                                    <input type="radio" name="printing_color_option"
-                                      id="printing_color_option_black" value="1" class="peer hidden" />
+                                    <input type="radio" name="printing_color_option" id="printing_color_option_black"
+                                      value="1" class="peer hidden" />
                                     <label for="printing_color_option_black"
                                       class="block text-xs cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white">Black
                                       & White</label>
@@ -207,7 +200,7 @@
     </div>
   </div>
   <!-- Success Modal -->
-  <div id="successModal" class="hidden fixed inset-0 flex items-center justify-center z-50">
+  <div id="successModal" class="fixed inset-0 flex items-center justify-center z-[80] hidden">
     <div class="fixed inset-0 bg-gray-600 bg-opacity-50"></div> <!-- Overlay -->
     <div
       class="relative bg-teal-50 border border-teal-200 text-sm text-teal-800 rounded-lg p-4 w-1/3 mx-auto dark:bg-teal-800/10 dark:border-teal-900 dark:text-teal-500 z-60">
@@ -243,6 +236,7 @@
       </div>
     </div>
   </div>
+
 
 
 
@@ -291,14 +285,11 @@
         }
       });
 
-
-
-
-
       // Update the hidden input field with the number of copies
       document.getElementById('copies').value = copies;
       if (copies > 100) {
         alert('The number of copies cannot exceed 100.');
+        return;
       }
 
       fetch('{{ route('user.update-preferences') }}', {
@@ -318,6 +309,9 @@
           if (data.success) {
             document.getElementById('successModal').classList.remove('hidden');
           }
+        })
+        .catch(error => {
+          console.error('Error:', error);
         });
 
       // Optionally, you can add code here to submit the form asynchronously using AJAX if needed

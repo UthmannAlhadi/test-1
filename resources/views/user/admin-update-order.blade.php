@@ -2,11 +2,11 @@
 
 
 
-  <div class="container mx-auto py-4 px-2 h-full" style="width: 1200px; height: 590px; overflow: hidden;">
+  <div class="container mx-auto py-4 px-2 h-full drop-shadow-lg" style="width: 1200px; height: 590px; overflow: hidden;">
     <!-- Content Left Side -->
     <div class="sm:col-span-2 h-full overflow-y-auto custom-scrollbar">
       <div class="bg-white overflow-hidden shadow-sm sm:rounded-2xl h-full">
-        <div class="bg-white border rounded shadow p-4 h-full">
+        <div class="bg-white rounded shadow p-4 h-full">
           <div class="p-2 h-full">
             @if (Session::has('message'))
               <div class="bg-green-500 text-white px-4 py-2 rounded">

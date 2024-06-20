@@ -45,15 +45,15 @@
 </body> --}}
 
 <body class="font-sans antialiased bg-gray-50 dark:bg-slate-900 min-h-screen">
-
+  <!-- Sidebar -->
+  @include('layouts.sidebar')
   <!-- Navigation -->
   @include('layouts.navigation')
 
-  <!-- Sidebar -->
-  @include('layouts.sidebar')
+
 
   <!-- Content -->
-  <div class="w-full pt-10 px-4 sm:px-6 md:px-8 lg:ps-72 bg-gray-50">
+  <div class="w-full px-4 sm:px-6 md:px-8 lg:ps-72 bg-gray-50">
     {{ $slot }}
   </div>
   <!-- End Content -->
